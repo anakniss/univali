@@ -1,5 +1,8 @@
 Algoritmo "Calculando comprimento e raio de uma circunferência"
 
+//Faça  um  algoritmo  que  leia  o  raio  de  uma  circunferência  e  calcule  o
+//  comprimento  e  a  área  da circunferência.
+
 Var
 
 area, comprimento, raio: real
