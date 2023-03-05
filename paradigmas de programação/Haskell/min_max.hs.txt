@@ -1,0 +1,10 @@
+max2        :: Integer -> Integer -> Integer
+max2 x y  = if (x >= y) then x else y
+
+min2        :: Integer -> Integer -> Integer
+min2 x y  = if (x < y) then x else y
+
+minEmax        :: Integer -> Integer -> Integer -> (Integer, Integer)
+minEmax x y z  = (min2 x (min2 y z), max2 x (max2 y z))
+
+main = putStrLn (show (minEmax 1 10 100))

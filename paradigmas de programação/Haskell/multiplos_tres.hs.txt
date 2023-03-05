@@ -1,0 +1,4 @@
+multiplosTres::[Int]->[Int]
+multiplosTres x = filter (\y -> (mod y 3) == 0) x
+
+main = putStrLn (show (multiplosTres [1, 3, 9, 19, 24]))

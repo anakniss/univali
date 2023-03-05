@@ -1,0 +1,4 @@
+dobraLista::[Int]->[Int]
+dobraLista x = map (2*) x
+
+main = putStrLn (show (dobraLista [1, 3, 9, 24]))

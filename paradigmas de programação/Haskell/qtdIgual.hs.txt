@@ -1,0 +1,12 @@
+qtdIgual:: Integer -> Integer -> Integer -> Integer
+qtdIgual x y z  = case (
+                    x == y && x == z, 
+                    (x == y && x /= z) ||
+                    (y == z) ||
+                    (x == z),
+                    x /= y && x /= z) of 
+                  (True, _, _) -> 3
+                  (_, True, _) -> 2
+                  (_, _, True) -> 0
+
+main = putStrLn (show (qtdIgual 3 2 5))

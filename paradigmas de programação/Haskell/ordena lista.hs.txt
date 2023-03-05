@@ -1,0 +1,3 @@
+import Data.List
+
+main = putStrLn (show (sort [3, 1, 8, 0]))
