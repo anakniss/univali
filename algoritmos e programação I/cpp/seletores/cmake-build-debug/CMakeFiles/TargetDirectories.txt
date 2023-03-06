@@ -1,0 +1,3 @@
+C:/Users/ackni/Documents/Code/github/univali/algoritmos e programação I/cpp/seletores/cmake-build-debug/CMakeFiles/seletores.dir
+C:/Users/ackni/Documents/Code/github/univali/algoritmos e programação I/cpp/seletores/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ackni/Documents/Code/github/univali/algoritmos e programação I/cpp/seletores/cmake-build-debug/CMakeFiles/rebuild_cache.dir

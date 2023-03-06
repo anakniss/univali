@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="858312d2-b387-4d96-95f8-f3baa69ebbdd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/1. CALCULANDO COMPRIMENTO E RAIO DE UMA CIRCUNFERÊNCIA.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/10. CALCULE O SALáRIO LíQUIDO DO FUNCIONáRIO COM DESCONTOS.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/11. CALCULE A TEMPERATURA DE FAHRENHEIT PARA CELSIUS.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/12. CALCULE X E Y DE UM SISTEMA LINEAR.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/13. CALCULE A ENERGIA DE COESãO.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/14. MAIOR VALOR ENTRE DOIS NúMEROS.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/15. MíNIMO DE NOTAS UTILIZADAS E TIPO DE NOTA FORNECIDO.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/2. CALCULANDO O VOLUME DA LATA DE ÓLEO.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/3. CALCULE A ÁREA DE ACORDO COM A FÓRMULA.alg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/4. CALCULE O COMPRIMENTO DA HIPOTENUSA.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/5. LEIA NA ORDEM INVERSA.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/6. CALCULE O SALARIO BRUTO.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/7. ESCREVA NOME, SALÁRIO BRUTO E LÍQUIDO.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/8. CALCULE A DISTâNCIA ENTRE OS PONTOS.ALG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algoritmos e programação I/visualg/list 1/9. CALCULE A MéDIA FINAL PONDERADA DO ALUNO.ALG" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2MMmdKi46erzX9cnr0c0Iz2HQui" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="858312d2-b387-4d96-95f8-f3baa69ebbdd" name="Changes" comment="" />
+      <created>1677585916098</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677585916098</updated>
+      <workItem from="1677585916858" duration="172000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
