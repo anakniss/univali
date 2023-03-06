@@ -13,10 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="867715c4-c73b-4dcc-8cf3-48e649b4746d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/seletores.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/exercício 10 - lista 2/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercício 7 - lista 2/exercício 7 - lista 2.layout" beforeDir="false" afterPath="$PROJECT_DIR$/exercício 7 - lista 2/exercício 7 - lista 2.layout" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exercício 11 - lista 2/exercise11.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,10 +49,23 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="C/C++ File.exercise11.cpp">
+    <configuration name="exercise11.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="seletores" TARGET_NAME="exercise11.cpp" CONFIG_NAME="exercise11.cpp">
+      <option name="sourceFile" value="exercício 11 - lista 2\exercise11.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main.cpp (1)" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="seletores" TARGET_NAME="main.cpp" CONFIG_NAME="main.cpp">
+      <option name="sourceFile" value="exercício 11 - lista 2\main.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="seletores" TARGET_NAME="main.cpp" CONFIG_NAME="main.cpp">
       <option name="sourceFile" value="exercício 10 - lista 2\main.cpp" />
       <method v="2">
@@ -62,6 +74,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="C/C++ File.exercise11.cpp" />
+        <item itemvalue="C/C++ File.main.cpp (1)" />
         <item itemvalue="C/C++ File.main.cpp" />
       </list>
     </recent_temporary>
@@ -74,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1678057734712</updated>
-      <workItem from="1678057735482" duration="1693000" />
+      <workItem from="1678057735482" duration="5560000" />
     </task>
     <servers />
   </component>
