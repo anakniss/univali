@@ -18,8 +18,11 @@ int main()
         pesoIdeal = (62.1 * altura) - 44.7;
         cout << "O seu peso ideal é: " << pesoIdeal << endl;
     }
-    if(genero == 'M'){
+    else if(genero == 'M'){
         pesoIdeal = (72.7 * altura) - 58;
         cout << "O seu peso ideal é: " << pesoIdeal << endl;
+    }
+    else {
+        cout << "Informe os dados corretos";
     }
 }
