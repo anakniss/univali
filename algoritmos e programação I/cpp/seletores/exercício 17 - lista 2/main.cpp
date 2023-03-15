@@ -13,7 +13,6 @@ int main()
     cin >> quantidadeItens;
 
     resto = quantidadeItens % 5;
-    cout << "Resto: " << resto;
     quantidadeCombo = int(quantidadeItens / 5);
 
     if (codigo == 100){
@@ -32,8 +31,4 @@ int main()
         valor = ((quantidadeItens * 12.25) - (quantidadeCombo * 12.25)) + (resto * 12.5);
         cout << "O valor total da promoção é: " << valor << endl;
     }
-
-
-
-    cout << valor;
 }
