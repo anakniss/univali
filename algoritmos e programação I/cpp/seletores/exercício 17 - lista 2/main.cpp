@@ -16,19 +16,30 @@ int main()
     quantidadeCombo = int(quantidadeItens / 5);
 
     if (codigo == 100){
-        valor = ((quantidadeItens * 13) - (quantidadeCombo * 13)) + (resto * 13);
+        valor = (quantidadeItens * 13) - (quantidadeCombo * 13);
         cout << "O valor total da promoção é: " << valor << endl;
+
+        cout << "Resto: " << resto << endl;
     }
-    if (codigo == 101){
-        valor = ((quantidadeItens * 12.50) - (quantidadeCombo * 12.50)) + (resto * 12.50);
+    else if (codigo == 101){
+        valor = (quantidadeItens * 12.50) - (quantidadeCombo * 12.50);
         cout << "O valor total da promoção é: " << valor << endl;
+
+        cout << "Resto: " << resto << endl;
     }
-    if (codigo == 102){
-        valor = ((quantidadeItens * 12) - (quantidadeCombo * 12)) + (resto * 12);
+    else if (codigo == 102){
+        valor = (quantidadeItens * 12) - (quantidadeCombo * 12);
         cout << "O valor total da promoção é: " << valor << endl;
+
+        cout << "Resto: " << resto << endl;
     }
-    if (codigo == 103){
-        valor = ((quantidadeItens * 12.25) - (quantidadeCombo * 12.25)) + (resto * 12.5);
+    else if (codigo == 103){
+        valor = (quantidadeItens * 12.25) - (quantidadeCombo * 12.25);
         cout << "O valor total da promoção é: " << valor << endl;
+
+        cout << "Resto: " << resto << endl;
+    }
+    else {
+        cout << "Informe um código válido";
     }
 }
