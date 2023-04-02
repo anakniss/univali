@@ -21,9 +21,7 @@ int main()
             cout << "Informe a quantidade vendida:" << endl;
             cin >> cont;
 
-
             salarioVendedor += (valorProduto * 0.3) * cont;
-
 
             totalVendas += valorProduto * cont;
 
