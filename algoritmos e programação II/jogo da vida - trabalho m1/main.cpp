@@ -115,11 +115,10 @@ int main()
 {
     srand(time(NULL));
     char aM[TMAX][TMAX];
-    char bM[TMAX][TMAX] = {{' '}};
+    char bM[TMAX][TMAX];
 
     preencheMatrizInicial(TMAX, aM);
 
-    cout << endl;
     do {
         for (int i=0; i<TMAX; i++)
             for (int j=0; j<TMAX; j++)
