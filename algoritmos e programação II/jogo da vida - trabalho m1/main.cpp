@@ -13,8 +13,8 @@ void morteSolidao(int i, int j, int cont, char aM[][TMAX], char bM[][TMAX]);
 
 
 void preencheMatrizInicial(int n, char aM[][TMAX]){
-    for (int i=0; i<n; i++)
-        for (int j=0; j < n; j++){
+    for (int i=0; i<TMAX; i++)
+        for (int j=0; j < TMAX; j++){
             if (rand()%10 < 2){
                 aM[i][j] = '*';
             }
