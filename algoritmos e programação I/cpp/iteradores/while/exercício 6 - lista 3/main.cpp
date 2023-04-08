@@ -5,16 +5,11 @@ using namespace std;
 int main()
 {
     int horas = 0;
-    int qntdBiscoitos = 0;
-    int valorAnterior = 3, valorAtual = 3;
+    int qntdBiscoitos = 1;
 
-    while(horas < 16){
-        cout << "Valor anterior: " << valorAnterior << endl;
-        valorAtual = valorAtual * valorAnterior;
-        valorAnterior = valorAtual;
-        cout << "Valor atual: " << valorAtual << endl;
+    while(horas <= 16){
+        qntdBiscoitos = qntdBiscoitos * 3;
         horas++;
     }
-    cout << "Valor total após 16h: " << valorAtual << endl;
-
+    cout << "Valor total após 16h: " << qntdBiscoitos << endl;
 }
