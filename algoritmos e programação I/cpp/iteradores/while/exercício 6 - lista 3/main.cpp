@@ -1,15 +1,16 @@
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
 int main()
 {
-    int horas = 1;
-    int qntdBiscoitos = 1;
-    int qntdBiscoitosTotal = 1;
+    int horas = 0;
+    int qntdBiscoitos = 0;
+    int qntdBiscoitosTotal = 0;
 
-    while(horas < 16){
-        qntdBiscoitos = qntdBiscoitos * 3;
+    while(horas < 3){
+        qntdBiscoitos = pow(3, horas);
         qntdBiscoitosTotal = qntdBiscoitos + qntdBiscoitosTotal;
         horas++;
     }
