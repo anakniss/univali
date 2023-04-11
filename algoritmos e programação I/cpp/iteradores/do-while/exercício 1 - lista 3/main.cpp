@@ -4,21 +4,24 @@ using namespace std;
 
 int main()
 {
-    int num, i = 0;
-    float media = 0;
+    int num = 1;
+    int num1;
+    float media;
+    int ind = 0;
 
     do {
-        cout << "Informe números pares: " << endl;
-        cin >> num;
+       cout << "Informe números pares: ";
+       cin >> num;
 
-        if(num % 2 == 0 && num != 0){
-            media = num + media;
-            i++;
-        }
-        else {
-            cout << "Informe apenas números pares!" << endl;
-        }
-    } while(num != 0);
+       if(num % 2 == 0){
+        num1 = num + num1;
+        ind = ind++;
+       }
+       else {
+        cout << "Informe um valor par!";
+       }
+    } while (num != 0);
 
-    cout << "A média dos valores informados é: " << (media) / i;
+    media = num1 / ind;
+    cout << "A média dos números informados é de: " << num1 << endl;
 }
