@@ -1,4 +1,5 @@
 #include <iostream>
+#define TMAX 20
 
 using namespace std;
 
@@ -7,11 +8,18 @@ int main()
     int n;
     float media;
     int abaixoMedia = 0;
-    string nomes[20];
-    float notas[20];
+    string nomes[TMAX];
+    float notas[TMAX];
 
-    cout << "Informe a quantidade de estudantes (máx 20): " << endl;
-    cin >> n;
+    do {
+        cout << "Informe a quantidade de estudantes (máx 20): " << endl;
+        cin >> n;
+
+        if(n < 0 || n > TMAX){
+            cout << "Informe um número válido" << endl;
+        }
+
+    } while(n < 0 || n > TMAX);
 
     float soma = 0;
 
@@ -32,10 +40,7 @@ int main()
         if(notas[i] >= media){
             cout << "Nome aluno acima da média: " << nomes[i] << endl;
         }
-    }
-
-    for(int i=0; i<n; i++){
-        if(notas[i] < media){
+        else {
             abaixoMedia++;
         }
     }
