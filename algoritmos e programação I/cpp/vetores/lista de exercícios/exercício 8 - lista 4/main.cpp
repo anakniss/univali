@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     int v[TMAX];
-    int i, n, maior = 0;
+    int i, j, n, maior = 0;
 
     cout << "Informe o número de valores a serem ordenados: " << endl;
     cin >> n;
@@ -21,20 +21,16 @@ int main()
         cin >> v[i];
     }
 
-    int y = n;
 
-    for(i=0; i<y; i++){
-        for(i=0; i<y; i++){
-            if(v[i] > maior){
-                maior = v[i];
+    for(i=0; i < n-1; i++){
+        for(j=0; j < n-i-1; i++){
+            if(v[i] > v[i + 1]){
+                int aux = v[i+1];
+                v[i+1] = v[i];
+                v[i] = aux;
             }
         }
-        v[y-1] = maior;
-        cout <<  "Maior: " << v[n-1] << endl;
-        y = y-1;
     }
-
-    cout << "Valor de N: " << v[y] << endl;
 
     for(i=0; i<n; i++){
         cout << v[i] << " ";
