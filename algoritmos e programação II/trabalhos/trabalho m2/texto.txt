@@ -1,0 +1,6 @@
+implementar pesquisa binária
+opção SAIR no menu
+não repetir código
+tratamento de validação
+pesquisa recursiva
+ordenação recursiva
