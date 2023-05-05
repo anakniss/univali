@@ -58,9 +58,47 @@ void inclusaoNovoLivro(int &n, Livro acervo[]){
     n++;
 }
 
-void ordenaBubbleSort(){
-    for(int i=0; i<n; i++){
+bool comparaStrings(string a, string b){
+    int tam;
 
+    if(a.size() > b.size()){
+        tam = b.size();
+    }
+    else {
+        tam = a.size();
+    }
+
+    for(int i=0; i<tam; i++){
+        if(a[i] > b[i]){
+            return true;
+        }
+        else {
+            if(b[i] > a[i]){
+                return false;
+            }
+        }
+    }
+
+    if(a.size() > b.size()){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void ordenaBubbleSort(Livro acervo[], int n){
+    int maior = 0;
+    Livro aux;
+    for(int i=0; i<n; i++){
+        for(int j=0; j< n-i-1; j++){
+            maior = comparaStrings(acervo[j].isbn, acervo[j+1].isbn);
+            if(maior != true){
+                aux = acervo[j];
+                acervo[j] = acervo[j+1];
+                acervo[j+1] = aux;
+            }
+        }
     }
 }
 
