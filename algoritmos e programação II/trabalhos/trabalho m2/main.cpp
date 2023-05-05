@@ -28,7 +28,7 @@ char validaCaracter(){
     do {
         cout << "O que deseja fazer?" << endl;
         cin.get(op);
-    } while(op<'A' or op>'G');
+    } while(op < 'A' or op > 'G');
 
     return toupper(op);
 }
@@ -45,15 +45,23 @@ void lerMenu(){
     cout << "G - Relatorio: Emprestimos" << endl;
 }
 
-void inclusaoNovoLivro(int &n, Livro &l, Emprestimo &e){
-    cout << "Informe o título do livro a ser adicionado: " << endl;
+void inclusaoNovoLivro(int &n, Livro acervo[]){
+    Livro l;
+    cout << "Informe o titulo do livro a ser adicionado: " << endl;
     getline(cin, l.titulo);
     cout << "Informe o nome do autor do livro: " << endl;
     getline(cin, l.autor);
     cout << "Informe a quantidade do acervo: " << endl;
     cin >> l.qtdAcervo;
-    e.qtdDisponivel = l.qtdAcervo;
+    acervo[n] = l;
+    l.qtdDisponivel = l.qtdAcervo;
     n++;
+}
+
+void ordenaBubbleSort(){
+    for(int i=0; i<n; i++){
+
+    }
 }
 
 void pesquisaRecBinaria(){
@@ -65,18 +73,18 @@ int main()
     char op;
     int n = 0;
 
-    Livro acervo[TMAX];
-    Emprestimo emprestimos[TMAX];
+    Livro acervo[50];
+    Emprestimo emprestimos[50];
 
     lerMenu();
     op = validaCaracter();
 
     switch (op) {
         case 'A':
-            cout << "Informe o código do ISBN do livro: " << endl;
+            cout << "Informe o cï¿½digo do ISBN do livro: " << endl;
             getline(cin, l.isbn);
             int iPesq = pesquisaRecBinaria();
-            if (iPesq<0)
+            if (iPesq < 0)
                 inclusaoNovoLivro();
             else
                 cout << "Livro ja cadastrado" << endl;
