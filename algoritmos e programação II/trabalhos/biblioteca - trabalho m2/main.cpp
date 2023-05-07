@@ -242,7 +242,7 @@ void incluaNovoLivro(int &n, Livro acervo[]){
 
 }
 
-void relatorioLivrosAcervo(int &n, Livro acervo[]){
+void relatorioLivrosAcervo(int n, Livro acervo[]){
     for(int i=0; i<n; i++){
         cout << "ISBN: " << acervo[i].isbn << endl;
         cout << "Titulo: " << acervo[i].titulo << endl;
@@ -289,6 +289,44 @@ void exclusaoLivro(int &n, Livro acervo[]){
         n--;
     }
 }
+
+void emprestimoExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo emprestimos[]){
+    int result;
+    string chave;
+    Emprestimo e;
+
+    leiaISBN(chave);
+
+    result = pesquisaRecBinaria(chave, acervo, 0, n-1);
+    if(result == -1){
+       cout << "Titulo inexistente" << endl;
+    }
+    else{
+        if(acervo[result].qtdDisponivel > 0){
+            leiaString("Informe a matricula: ", e.matricula);
+            cout << "Matricula: " << e.matricula;
+            leiaInteiro("Data: Informe o dia do emprestimo: ", e.data.dia);
+            leiaInteiro("Informe o mes do emprestimo: ", e.data.mes);
+            leiaInteiro("Informe o ano do emprestimo: ", e.data.ano);
+            e.isbn = acervo[result].isbn;
+            emprestimos[l] = e;
+            cout << "“Emprestimo realizado – codigo " << l << endl;
+            acervo[result].qtdDisponivel--;
+            l++;
+        }
+        else {
+            cout << "Exemplar indisponivel para emprestimo" << endl;
+        }
+    }
+}
+
+void relatorioEmprestimosAtivos(int l, Emprestimo e[]){
+    for(int i=0; i<l; i++){
+        cout << "Matricula: " << e[i].matricula << endl;
+        cout << "Data: " << e[i].data.dia << "/" << e[i].data.mes << "/" << e[i].data.ano << endl;
+        cout << "ISBN: " << e[i].isbn << endl;
+    }
+}
 /*
 int main(){
     int acervo[] = {1, 4, 5, 7, 8, 9, 10};
@@ -301,6 +339,7 @@ int main()
 {
     char opcao;
     int n = 0;
+    int l = 0;
 
     Livro acervo[50];
     Emprestimo emprestimos[50];
@@ -319,11 +358,15 @@ int main()
                 exclusaoLivro(n, acervo);
                 break;
             case 'D':
+                emprestimoExemplarLivro(n, l, acervo, emprestimos);
+                break;
+            case 'E':
                 break;
             case 'F':
                 relatorioLivrosAcervo(n, acervo);
                 break;
             case 'G':
+                relatorioEmprestimosAtivos(l, emprestimos);
                 break;
         }
     } while(opcao != 'H');
