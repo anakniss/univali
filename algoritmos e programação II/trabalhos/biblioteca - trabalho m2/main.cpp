@@ -20,7 +20,7 @@ typedef struct {
 } Data;
 
 typedef struct {
-    string matricula;
+    int matricula;
     string isbn;
     Data data;
 } Emprestimo;
@@ -112,28 +112,6 @@ int pesquisaRecBinaria(string chave, Livro acervo[], int inicio, int fim){
     }
     return -1;
 }
-
-bool pesquisaRecBinaria2(int chave, int acervo[], int inicio, int fim){
-
-    if(inicio <= fim){
-        int meio = (inicio + fim) / 2;
-
-        if(chave == acervo[meio]){
-            return true;
-        }
-
-        else {
-            if(chave < acervo[meio]){
-                return pesquisaRecBinaria2(chave, acervo, inicio, meio - 1);
-            }
-            else {
-                return pesquisaRecBinaria2(chave, acervo, meio + 1, fim);
-            }
-        }
-    }
-    return false;
-}
-
 
 bool validaISBN(string isbn){
     if(isbn.size() != 17){
@@ -243,6 +221,9 @@ void incluaNovoLivro(int &n, Livro acervo[]){
 }
 
 void relatorioLivrosAcervo(int n, Livro acervo[]){
+    if(n == 0){
+            cout << "Nao existem dados a serem informados" << endl;
+    }
     for(int i=0; i<n; i++){
         cout << "ISBN: " << acervo[i].isbn << endl;
         cout << "Titulo: " << acervo[i].titulo << endl;
@@ -303,7 +284,7 @@ void emprestimoExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo empresti
     }
     else{
         if(acervo[result].qtdDisponivel > 0){
-            leiaString("Informe a matricula: ", e.matricula);
+            leiaInteiro("Informe a matricula: ", e.matricula);
             cout << "Matricula: " << e.matricula;
             leiaInteiro("Data: Informe o dia do emprestimo: ", e.data.dia);
             leiaInteiro("Informe o mes do emprestimo: ", e.data.mes);
@@ -320,21 +301,55 @@ void emprestimoExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo empresti
     }
 }
 
-void relatorioEmprestimosAtivos(int l, Emprestimo e[]){
-    for(int i=0; i<l; i++){
-        cout << "Matricula: " << e[i].matricula << endl;
-        cout << "Data: " << e[i].data.dia << "/" << e[i].data.mes << "/" << e[i].data.ano << endl;
-        cout << "ISBN: " << e[i].isbn << endl;
+void devolucaoLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
+    int codigo;
+    int result;
+    char opcao;
+    leiaInteiro("Informe o codigo do emprestimo: ", codigo);
+
+    if(codigo >= l){
+        cout << "Registro inexistente" << endl;
+    }
+    else {
+        if(e[codigo].matricula == -1){
+            cout << "Devolução já realizada" << endl;
+        }
+        else {
+            result = pesquisaRecBinaria(e[codigo].isbn, acervo, 0, n-1);
+            if(result == 0){
+                cout << "Matricula: " << e[codigo].matricula << endl;
+                cout << "ISBN: " << e[codigo].isbn << endl;
+                cout << "Data: " << e[codigo].data.dia << "/" << e[codigo].data.mes << "/" << e[codigo].data.ano << endl;
+                cout << "Deseja mesmo devolver o livro? S/N" << endl;
+                cin.get(opcao);
+                opcao = toupper(opcao);
+                cin.ignore();
+                if(opcao == 'S'){
+                    e[codigo].matricula = -1;
+                    acervo[result].qtdDisponivel++;
+                    l--;
+                    cout << "Tamanho do array de emprestimos: " << l << endl;
+                    cout << "Devolucao realizada" << endl;
+                }
+            }
+        }
     }
 }
-/*
-int main(){
-    int acervo[] = {1, 4, 5, 7, 8, 9, 10};
-    bool result = pesquisaRecBinaria2(10, acervo, 0, 6);
-    cout << result;
 
+void relatorioEmprestimosAtivos(int l, Emprestimo e[]){
+    cout << "L: " << l << endl;
+    if(l == 0){
+            cout << "Nao existem dados a serem informados" << endl;
+    }
+    for(int i=0; i<l; i++){
+        if(e[i].matricula != -1){
+            cout << "Matricula: " << e[i].matricula << endl;
+            cout << "Data: " << e[i].data.dia << "/" << e[i].data.mes << "/" << e[i].data.ano << endl;
+            cout << "ISBN: " << e[i].isbn << endl;
+        }
+    }
 }
-*/
+
 int main()
 {
     char opcao;
@@ -361,6 +376,7 @@ int main()
                 emprestimoExemplarLivro(n, l, acervo, emprestimos);
                 break;
             case 'E':
+                devolucaoLivro(l, n, acervo, emprestimos);
                 break;
             case 'F':
                 relatorioLivrosAcervo(n, acervo);
