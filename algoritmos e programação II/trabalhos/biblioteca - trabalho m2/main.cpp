@@ -28,7 +28,6 @@ typedef struct {
 char leiaOpcao();
 char leiaSN(string);
 void leiaData(string, int &, int &, int &);
-int comparaStrings(string, string);
 void ordenaBubbleSortRecursivo(int, Livro []);
 int pesquisaRecBinaria(string, Livro [], int, int);
 bool validaISBN(string);
@@ -107,45 +106,13 @@ void leiaData(string mensagem, int &dia, int &mes, int &ano){
     }
 }
 
-int comparaStrings(string a, string b){
-    int tam;
-
-    if(a.size() > b.size()){
-        tam = b.size();
-    }
-    else {
-        tam = a.size();
-    }
-
-    for(int i=0; i<tam; i++){
-        if(a[i] > b[i]){
-            return 1;
-        }
-        else if(b[i] > a[i]){
-                return -1;
-        }
-    }
-
-    if(a.size() > b.size()){
-        return 1;
-    }
-    else if(a.size() == b.size()){
-        return 0;
-    }
-    else {
-        return -1;
-    }
-}
-
 void ordenaBubbleSortRecursivo(int n, Livro acervo[]){
-    int comp;
     if(n == 1){
         return;
     }
 
     for(int i=0; i < n-1; i++){
-        comp = comparaStrings(acervo[i].isbn, acervo[i+1].isbn);
-        if(comp == 1){
+        if(acervo[i].isbn > acervo[i+1].isbn){
             swap(acervo[i].isbn, acervo[i+1].isbn);
         }
     }
@@ -155,12 +122,11 @@ void ordenaBubbleSortRecursivo(int n, Livro acervo[]){
 int pesquisaRecBinaria(string chave, Livro acervo[], int inicio, int fim){
     if(inicio <= fim){
         int meio = (inicio + fim) / 2;
-        int comp = comparaStrings(chave, acervo[meio].isbn);
 
-        if(comp == 0){
+        if(chave == acervo[meio].isbn){
             return meio;
         }
-        else if(comp == -1){
+        else if(chave < acervo[meio].isbn){
             return pesquisaRecBinaria(chave, acervo, inicio, meio - 1);
         }
         else {
