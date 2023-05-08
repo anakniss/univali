@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#define TMAX 50;
+#define TMAX 50
 
 using namespace std;
 
@@ -25,7 +25,29 @@ typedef struct {
     Data data;
 } Emprestimo;
 
-char leiaCaracter(){
+char leiaOpcao();
+char leiaSN(string);
+void leiaData(string, int &, int &, int &);
+int comparaStrings(string, string);
+void ordenaBubbleSortRecursivo(int, Livro []);
+int pesquisaRecBinaria(string, Livro [], int, int);
+bool validaISBN(string);
+void leiaISBN(string &);
+void leiaMenu();
+void leiaString(string, string &);
+void leiaInteiro(string, int &);
+void incluaNovoLivro(int &, Livro []);
+void mostraLivro(int, Livro []);
+void mostraEmprestimo(int, Emprestimo []);
+void relatorioLivrosAcervo(int, Livro[]);
+void consultaLivro(int, Livro []);
+void excluaLivro(int &, Livro []);
+void emprestaExemplarLivro(int &, int &, Livro [], Emprestimo []);
+void devolvaLivro(int &, int, Livro [], Emprestimo []);
+void mostraRelatorioLivrosAcervo(int, Livro []);
+void mostraRelatorioEmprestimosAtivos(int, Emprestimo []);
+
+char leiaOpcao(){
     char opcao;
 
     cout << "O que deseja fazer?" << endl;
@@ -36,6 +58,8 @@ char leiaCaracter(){
     while(opcao < 'A' or opcao > 'H'){
         cout << "Opcao invalida. Informe novamente: " << endl;
         cin.get(opcao);
+
+        opcao = toupper(opcao);
         cin.ignore();
     }
 
@@ -54,9 +78,33 @@ char leiaSN(string mensagem){
         cout << "Opcao invalida. Informe novamente: " << endl;
         cin.get(opcao);
         cin.ignore();
+
+        opcao = toupper(opcao);
     }
 
     return opcao;
+}
+
+void leiaData(string mensagem, int &dia, int &mes, int &ano){
+    cout << mensagem << endl;
+
+    leiaInteiro("Informe o dia: ", dia);
+
+    while(dia < 1 or dia > 31){
+        leiaInteiro("Valor do dia invalido. Informe novamente: ", dia);
+    }
+
+    leiaInteiro("Informe o mes: ", mes);
+
+    while(mes < 1 or mes > 12){
+        leiaInteiro("Valor do mes invalido. Informe novamente: ", mes);
+    }
+
+    leiaInteiro("Informe o ano (4 digitos): ", ano);
+
+    while(ano < 1940 or ano > 2023){
+        leiaInteiro("Valor do ano invalido. Informe novamente: ", ano);
+    }
 }
 
 int comparaStrings(string a, string b){
@@ -73,43 +121,38 @@ int comparaStrings(string a, string b){
         if(a[i] > b[i]){
             return 1;
         }
-        else {
-            if(b[i] > a[i]){
+        else if(b[i] > a[i]){
                 return -1;
-            }
         }
     }
 
     if(a.size() > b.size()){
         return 1;
     }
+    else if(a.size() == b.size()){
+        return 0;
+    }
     else {
-        if(a.size() == b.size()){
-            return 0;
-        }
-        else {
-            return -1;
-        }
+        return -1;
     }
 }
 
-void bubbleSortRecursivo(int n, Livro acervo[]){
-    int comp = 0;
-    int i = 0;
+void ordenaBubbleSortRecursivo(int n, Livro acervo[]){
+    int comp;
     if(n == 1){
         return;
     }
-    comp = comparaStrings(acervo[i].isbn, acervo[i+1].isbn);
+
     for(int i=0; i < n-1; i++){
+        comp = comparaStrings(acervo[i].isbn, acervo[i+1].isbn);
         if(comp == 1){
             swap(acervo[i].isbn, acervo[i+1].isbn);
         }
     }
-    return bubbleSortRecursivo(n-1, acervo);
+    ordenaBubbleSortRecursivo(n-1, acervo);
 }
 
 int pesquisaRecBinaria(string chave, Livro acervo[], int inicio, int fim){
-
     if(inicio <= fim){
         int meio = (inicio + fim) / 2;
         int comp = comparaStrings(chave, acervo[meio].isbn);
@@ -117,14 +160,11 @@ int pesquisaRecBinaria(string chave, Livro acervo[], int inicio, int fim){
         if(comp == 0){
             return meio;
         }
-
+        else if(comp == -1){
+            return pesquisaRecBinaria(chave, acervo, inicio, meio - 1);
+        }
         else {
-            if(comp == -1){
-                return pesquisaRecBinaria(chave, acervo, inicio, meio - 1);
-            }
-            else {
-                return pesquisaRecBinaria(chave, acervo, meio + 1, fim);
-            }
+            return pesquisaRecBinaria(chave, acervo, meio + 1, fim);
         }
     }
     return -1;
@@ -171,19 +211,19 @@ bool validaISBN(string isbn){
 
 void leiaISBN(string &isbn){
     bool result;
-    cout << "Informe o codigo ISBN com o seguinte padrao: '978-3-16-148410-0' " << endl;
+    cout << "Informe o codigo ISBN (ex: 132-2-11-321543-3)" << endl;
     getline(cin, isbn);
     result = validaISBN(isbn);
 
     while(result == false){
-        cout << "Codigo ISBN invalido. Informe o valor que corresponda ao seguinte exemplo: '978-3-16-148410-0': " << endl;
+        cout << "Codigo ISBN invalido. Informe um codigo valido (ex: 132-2-11-321543-3)" << endl;
         getline(cin, isbn);
         result = validaISBN(isbn);
     }
 }
 
 void leiaMenu(){
-    cout << "Menu de Biblioteca" << endl;
+    cout << "Menu da Biblioteca" << endl;
     cout << "Opcoes: " << endl;
     cout << "A - Inclusao de um novo livro" << endl;
     cout << "B - Consulta a um livro" << endl;
@@ -197,21 +237,25 @@ void leiaMenu(){
 
 void leiaString(string mensagem, string &nome){
     cout << mensagem << endl;
-    cin.ignore();
     getline(cin, nome);
 
     while(nome.size() == 0){
         cout << "Valor vazio. Informe novamente: " << endl;
+        cin.ignore();
         getline(cin, nome);
     }
 }
 
 void leiaInteiro(string mensagem, int &num){
-    do {
-        cout << mensagem << endl;
+    cout << mensagem << endl;
+    cin >> num;
+    while(cin.fail()) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Dado invalido. Informe novamente" << endl;
         cin >> num;
-        cin.ignore();
-    } while(num < 0);
+    }
+    cin.ignore();
 }
 
 void incluaNovoLivro(int &n, Livro acervo[]){
@@ -233,7 +277,7 @@ void incluaNovoLivro(int &n, Livro acervo[]){
         cout << "Titulo ja existente";
     }
 
-    bubbleSortRecursivo(n, acervo);
+    ordenaBubbleSortRecursivo(n, acervo);
 
 }
 
@@ -251,7 +295,7 @@ void mostraEmprestimo(int i, Emprestimo e[]){
     cout << "ISBN: " << e[i].isbn << endl;
 }
 
-void relatorioLivrosAcervo(int n, Livro acervo[]){
+void mostraRelatorioLivrosAcervo(int n, Livro acervo[]){
     if(n == 0){
             cout << "Nao existem dados a serem informados" << endl;
     }
@@ -276,7 +320,8 @@ void consultaLivro(int n, Livro acervo[]){
     }
 }
 
-void exclusaoLivro(int &n, Livro acervo[]){
+void excluaLivro(int &n, Livro acervo[]){
+
     int result;
     string chave;
     char opcao;
@@ -289,8 +334,8 @@ void exclusaoLivro(int &n, Livro acervo[]){
     }
     else{
         mostraLivro(result, acervo);
-        opcao = leiaSN("Deseja mesmo excluir o livro?");
-        cout << "Opcao: " << opcao;
+        opcao = leiaSN("Deseja mesmo excluir o livro? S/N");
+
         if(opcao == 'S'){
             for(int i=result; i<n-1; i++){
             acervo[i] = acervo[i+1];
@@ -301,7 +346,7 @@ void exclusaoLivro(int &n, Livro acervo[]){
     }
 }
 
-void emprestimoExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo emprestimos[]){
+void emprestaExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo emprestimos[]){
     int result;
     string chave;
     Emprestimo e;
@@ -315,13 +360,10 @@ void emprestimoExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo empresti
     else{
         if(acervo[result].qtdDisponivel > 0){
             leiaInteiro("Informe a matricula: ", e.matricula);
-            cout << "Matricula: " << e.matricula;
-            leiaInteiro("Data: Informe o dia do emprestimo: ", e.data.dia);
-            leiaInteiro("Informe o mes do emprestimo: ", e.data.mes);
-            leiaInteiro("Informe o ano do emprestimo: ", e.data.ano);
+            leiaData("Data do emprestimo", e.data.dia, e.data.mes, e.data.ano);
             e.isbn = acervo[result].isbn;
             emprestimos[l] = e;
-            cout << "“Emprestimo realizado – codigo " << l << endl;
+            cout << "Emprestimo realizado - codigo " << l << endl;
             acervo[result].qtdDisponivel--;
             l++;
         }
@@ -331,7 +373,7 @@ void emprestimoExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo empresti
     }
 }
 
-void devolucaoLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
+void devolvaLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
     int codigo;
     int result;
     char opcao;
@@ -342,7 +384,7 @@ void devolucaoLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
     }
     else {
         if(e[codigo].matricula == -1){
-            cout << "Devolução já realizada" << endl;
+            cout << "Devolucao ja realizada" << endl;
         }
         else {
             result = pesquisaRecBinaria(e[codigo].isbn, acervo, 0, n-1);
@@ -355,7 +397,6 @@ void devolucaoLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
                     e[codigo].matricula = -1;
                     acervo[result].qtdDisponivel++;
                     l--;
-                    cout << "Tamanho do array de emprestimos: " << l << endl;
                     cout << "Devolucao realizada" << endl;
                 }
             }
@@ -363,7 +404,7 @@ void devolucaoLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
     }
 }
 
-void relatorioEmprestimosAtivos(int l, Emprestimo e[]){
+void mostraRelatorioEmprestimosAtivos(int l, Emprestimo e[]){
     cout << "L: " << l << endl;
     if(l == 0){
             cout << "Nao existem dados a serem informados" << endl;
@@ -382,12 +423,12 @@ int main()
     int n = 0;
     int l = 0;
 
-    Livro acervo[50];
-    Emprestimo emprestimos[50];
+    Livro acervo[TMAX];
+    Emprestimo emprestimos[TMAX];
 
     do {
         leiaMenu();
-        opcao = leiaCaracter();
+        opcao = leiaOpcao();
         switch (opcao) {
             case 'A':
                 incluaNovoLivro(n, acervo);
@@ -396,19 +437,19 @@ int main()
                 consultaLivro(n, acervo);
                 break;
             case 'C':
-                exclusaoLivro(n, acervo);
+                excluaLivro(n, acervo);
                 break;
             case 'D':
-                emprestimoExemplarLivro(n, l, acervo, emprestimos);
+                emprestaExemplarLivro(n, l, acervo, emprestimos);
                 break;
             case 'E':
-                devolucaoLivro(l, n, acervo, emprestimos);
+                devolvaLivro(l, n, acervo, emprestimos);
                 break;
             case 'F':
-                relatorioLivrosAcervo(n, acervo);
+                mostraRelatorioLivrosAcervo(n, acervo);
                 break;
             case 'G':
-                relatorioEmprestimosAtivos(l, emprestimos);
+                mostraRelatorioEmprestimosAtivos(l, emprestimos);
                 break;
         }
     } while(opcao != 'H');
