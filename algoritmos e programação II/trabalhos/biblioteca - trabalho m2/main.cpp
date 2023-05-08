@@ -42,6 +42,23 @@ char leiaCaracter(){
     return opcao;
 }
 
+char leiaSN(string mensagem){
+    char opcao;
+
+    cout << mensagem << endl;
+    cin.get(opcao);
+    cin.ignore();
+    opcao = toupper(opcao);
+
+    while(opcao != 'S' and opcao != 'N'){
+        cout << "Opcao invalida. Informe novamente: " << endl;
+        cin.get(opcao);
+        cin.ignore();
+    }
+
+    return opcao;
+}
+
 int comparaStrings(string a, string b){
     int tam;
 
@@ -76,19 +93,19 @@ int comparaStrings(string a, string b){
     }
 }
 
-void ordenaBubbleSort(Livro acervo[], int n){
+void bubbleSortRecursivo(int n, Livro acervo[]){
     int comp = 0;
-    Livro aux;
-    for(int i=0; i<n; i++){
-        for(int j=0; j< n-i-1; j++){
-            comp = comparaStrings(acervo[j].isbn, acervo[j+1].isbn);
-            if(comp == 1){
-                aux = acervo[j];
-                acervo[j] = acervo[j+1];
-                acervo[j+1] = aux;
-            }
+    int i = 0;
+    if(n == 1){
+        return;
+    }
+    comp = comparaStrings(acervo[i].isbn, acervo[i+1].isbn);
+    for(int i=0; i < n-1; i++){
+        if(comp == 1){
+            swap(acervo[i].isbn, acervo[i+1].isbn);
         }
     }
+    return bubbleSortRecursivo(n-1, acervo);
 }
 
 int pesquisaRecBinaria(string chave, Livro acervo[], int inicio, int fim){
@@ -216,8 +233,22 @@ void incluaNovoLivro(int &n, Livro acervo[]){
         cout << "Titulo ja existente";
     }
 
-    ordenaBubbleSort(acervo, n);
+    bubbleSortRecursivo(n, acervo);
 
+}
+
+void mostraLivro(int i, Livro acervo[]){
+    cout << "ISBN: " << acervo[i].isbn << endl;
+    cout << "Titulo: " << acervo[i].titulo << endl;
+    cout << "Autor: " << acervo[i].autor << endl;
+    cout << "Quantidade do acervo: " << acervo[i].qtdAcervo << endl;
+    cout << "Quantidade disponivel: " << acervo[i].qtdDisponivel << endl;
+}
+
+void mostraEmprestimo(int i, Emprestimo e[]){
+    cout << "Matricula: " << e[i].matricula << endl;
+    cout << "Data: " << e[i].data.dia << "/" << e[i].data.mes << "/" << e[i].data.ano << endl;
+    cout << "ISBN: " << e[i].isbn << endl;
 }
 
 void relatorioLivrosAcervo(int n, Livro acervo[]){
@@ -225,11 +256,7 @@ void relatorioLivrosAcervo(int n, Livro acervo[]){
             cout << "Nao existem dados a serem informados" << endl;
     }
     for(int i=0; i<n; i++){
-        cout << "ISBN: " << acervo[i].isbn << endl;
-        cout << "Titulo: " << acervo[i].titulo << endl;
-        cout << "Autor: " << acervo[i].autor << endl;
-        cout << "Quantidade do acervo: " << acervo[i].qtdAcervo << endl;
-        cout << "Quantidade disponivel: " << acervo[i].qtdDisponivel << endl;
+        mostraLivro(i, acervo);
         cout << "==========================================" << endl;
     }
 }
@@ -245,17 +272,14 @@ void consultaLivro(int n, Livro acervo[]){
        cout << "Titulo inexistente" << endl;
     }
     else{
-        cout << "ISBN: " << acervo[result].isbn << endl;
-        cout << "Titulo: " << acervo[result].titulo << endl;
-        cout << "Autor: " << acervo[result].autor << endl;
-        cout << "Quantidade do acervo: " << acervo[result].qtdAcervo << endl;
-        cout << "Quantidade disponivel: " << acervo[result].qtdDisponivel << endl;
+        mostraLivro(result, acervo);
     }
 }
 
 void exclusaoLivro(int &n, Livro acervo[]){
     int result;
     string chave;
+    char opcao;
 
     leiaISBN(chave);
 
@@ -264,10 +288,16 @@ void exclusaoLivro(int &n, Livro acervo[]){
        cout << "Titulo inexistente, impossivel excluir" << endl;
     }
     else{
-        for(int i=result; i<n-1; i++){
+        mostraLivro(result, acervo);
+        opcao = leiaSN("Deseja mesmo excluir o livro?");
+        cout << "Opcao: " << opcao;
+        if(opcao == 'S'){
+            for(int i=result; i<n-1; i++){
             acervo[i] = acervo[i+1];
+            }
+            n--;
+            cout << "Exclusao realizada" << endl;
         }
-        n--;
     }
 }
 
@@ -317,13 +347,10 @@ void devolucaoLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
         else {
             result = pesquisaRecBinaria(e[codigo].isbn, acervo, 0, n-1);
             if(result == 0){
-                cout << "Matricula: " << e[codigo].matricula << endl;
-                cout << "ISBN: " << e[codigo].isbn << endl;
-                cout << "Data: " << e[codigo].data.dia << "/" << e[codigo].data.mes << "/" << e[codigo].data.ano << endl;
-                cout << "Deseja mesmo devolver o livro? S/N" << endl;
-                cin.get(opcao);
-                opcao = toupper(opcao);
-                cin.ignore();
+                mostraEmprestimo(codigo, e);
+
+                opcao = leiaSN("Deseja mesmo devolver o livro? S/N");
+
                 if(opcao == 'S'){
                     e[codigo].matricula = -1;
                     acervo[result].qtdDisponivel++;
@@ -343,9 +370,8 @@ void relatorioEmprestimosAtivos(int l, Emprestimo e[]){
     }
     for(int i=0; i<l; i++){
         if(e[i].matricula != -1){
-            cout << "Matricula: " << e[i].matricula << endl;
-            cout << "Data: " << e[i].data.dia << "/" << e[i].data.mes << "/" << e[i].data.ano << endl;
-            cout << "ISBN: " << e[i].isbn << endl;
+            mostraEmprestimo(i, e);
+            cout << "==========================================" << endl;
         }
     }
 }
