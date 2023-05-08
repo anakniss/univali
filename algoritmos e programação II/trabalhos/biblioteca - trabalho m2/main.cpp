@@ -298,7 +298,11 @@ void excluaLivro(int &n, Livro acervo[]){
     if(result == -1){
        cout << "Titulo inexistente, impossivel excluir" << endl;
     }
-    else{
+    else if (acervo[result].qtdAcervo > acervo[result].qtdDisponivel){
+        cout << "Impossivel excluir. Existem livros emprestados" << endl;
+    }
+
+    else {
         mostraLivro(result, acervo);
         opcao = leiaSN("Deseja mesmo excluir o livro? S/N");
 
@@ -371,7 +375,6 @@ void devolvaLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
 }
 
 void mostraRelatorioEmprestimosAtivos(int l, Emprestimo e[]){
-    cout << "L: " << l << endl;
     if(l == 0){
             cout << "Nao existem dados a serem informados" << endl;
     }
