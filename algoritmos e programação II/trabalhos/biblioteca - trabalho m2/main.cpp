@@ -42,7 +42,7 @@ void relatorioLivrosAcervo(int, Livro[]);
 void consultaLivro(int, Livro []);
 void excluaLivro(int &, Livro []);
 void emprestaExemplarLivro(int &, int &, Livro [], Emprestimo []);
-void devolvaLivro(int &, int, Livro [], Emprestimo []);
+void devolvaLivro(int, int, Livro [], Emprestimo []);
 void mostraRelatorioLivrosAcervo(int, Livro []);
 void mostraRelatorioEmprestimosAtivos(int, Emprestimo []);
 
@@ -201,21 +201,44 @@ void leiaMenu(){
     cout << "H - Sair" << endl;
 }
 
-void leiaString(string mensagem, string &nome){
+void leiaTitulo(string mensagem, string &titulo){
+    cout << mensagem << endl;
+    getline(cin, titulo);
+
+    while(titulo.size() == 0){
+        cout << "Dado invalido. Digite novamente:" << endl;
+        getline(cin, titulo);
+    }
+}
+
+bool validaNome(string nome){
+    if(nome.size() == 0){
+        return false;
+    }
+    for(int i=0; i < nome.size(); i++){
+        if(not isalpha(nome[i]) and nome[i]!= ' '){
+            return false;
+        }
+    }
+    return true;
+}
+
+void leiaNome(string mensagem, string &nome){
     cout << mensagem << endl;
     getline(cin, nome);
+    bool comp = validaNome(nome);
 
-    while(nome.size() == 0){
-        cout << "Valor vazio. Informe novamente: " << endl;
-        cin.ignore();
+    while(comp == false){
+        cout << "Dado invalido. Digite novamente:" << endl;
         getline(cin, nome);
+        comp = validaNome(nome);
     }
 }
 
 void leiaInteiro(string mensagem, int &num){
     cout << mensagem << endl;
     cin >> num;
-    while(cin.fail()) {
+    while(num < 0 or cin.fail()) {
         cin.clear();
         cin.ignore(10000, '\n');
         cout << "Dado invalido. Informe novamente" << endl;
@@ -232,8 +255,8 @@ void incluaNovoLivro(int &n, Livro acervo[]){
     result = pesquisaRecBinaria(l.isbn, acervo, 0, n-1);
 
     if(result == -1){
-        leiaString("Informe o titulo do livro a ser adicionado: ", l.titulo);
-        leiaString("Informe o nome do autor do livro: ", l.autor);
+        leiaTitulo("Informe o titulo do livro a ser adicionado: ", l.titulo);
+        leiaNome("Informe o nome do autor do livro: ", l.autor);
         leiaInteiro("Informe a quantidade do acervo: ", l.qtdAcervo);
         l.qtdDisponivel = l.qtdAcervo;
         acervo[n] = l;
@@ -331,7 +354,6 @@ void emprestaExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo emprestimo
         if(acervo[result].qtdDisponivel > 0){
             leiaInteiro("Informe a matricula: ", e.matricula);
             leiaData("Data do emprestimo", e.data.dia, e.data.mes, e.data.ano);
-            e.isbn = acervo[result].isbn;
             emprestimos[l] = e;
             cout << "Emprestimo realizado - codigo " << l << endl;
             acervo[result].qtdDisponivel--;
@@ -343,7 +365,7 @@ void emprestaExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo emprestimo
     }
 }
 
-void devolvaLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
+void devolvaLivro(int l, int n, Livro acervo[], Emprestimo e[]){
     int codigo;
     int result;
     char opcao;
@@ -366,7 +388,6 @@ void devolvaLivro(int &l, int n, Livro acervo[], Emprestimo e[]){
                 if(opcao == 'S'){
                     e[codigo].matricula = -1;
                     acervo[result].qtdDisponivel++;
-                    l--;
                     cout << "Devolucao realizada" << endl;
                 }
             }
