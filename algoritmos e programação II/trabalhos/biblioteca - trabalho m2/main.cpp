@@ -283,6 +283,7 @@ void mostraLivro(int i, Livro acervo[]){
 }
 
 void mostraEmprestimo(int i, Emprestimo e[]){
+    cout << "Codigo: " << i << endl;
     cout << "Matricula: " << e[i].matricula << endl;
     cout << "Data: " << e[i].data.dia << "/" << e[i].data.mes << "/" << e[i].data.ano << endl;
     cout << "ISBN: " << e[i].isbn << endl;
@@ -358,6 +359,7 @@ void emprestaExemplarLivro(int &n, int &l, Livro acervo[], Emprestimo emprestimo
         if(acervo[result].qtdDisponivel > 0){
             leiaInteiro("Informe a matricula: ", e.matricula);
             leiaData("Data do emprestimo", e.data.dia, e.data.mes, e.data.ano);
+            e.isbn = chave;
             emprestimos[l] = e;
             cout << "Emprestimo realizado - codigo " << l << endl;
             acervo[result].qtdDisponivel--;
