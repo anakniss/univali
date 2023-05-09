@@ -112,7 +112,6 @@ void ordenaBubbleSortRecursivo(int n, Livro acervo[]){
         return;
     }
 
-
     for(int i=0; i < n-1; i++){
         if(acervo[i].isbn > acervo[i+1].isbn){
             swap(acervo[i].isbn, acervo[i+1].isbn);
