@@ -52,41 +52,37 @@ void mostraRelatorioLivrosAcervo(int, Livro []);
 void mostraRelatorioEmprestimosAtivos(int, Emprestimo []);
 
 char leiaOpcao(){
-    char opcao;
+    string opcao;
 
     cout << "O que deseja fazer?" << endl;
-    cin.get(opcao);
-    cin.ignore();
-    opcao = toupper(opcao);
+    getline(cin, opcao);
+    opcao[0] = toupper(opcao[0]);
 
-    while(opcao < 'A' or opcao > 'H'){
+    while(opcao.size() != 1 or opcao[0] < 'A' or opcao[0] > 'H'){
         cout << "Opcao invalida. Informe novamente: " << endl;
-        cin.get(opcao);
+        getline(cin, opcao);
 
-        opcao = toupper(opcao);
-        cin.ignore();
+        opcao[0] = toupper(opcao[0]);
     }
 
-    return opcao;
+    return opcao[0];
 }
 
 char leiaSN(string mensagem){
-    char opcao;
+    string opcao;
 
     cout << mensagem << endl;
-    cin.get(opcao);
-    cin.ignore();
-    opcao = toupper(opcao);
+    getline(cin, opcao);
 
-    while(opcao != 'S' and opcao != 'N'){
+    opcao[0] = toupper(opcao[0]);
+
+    while(opcao.size() != 1 or opcao[0] != 'S' and opcao[0] != 'N'){
         cout << "Opcao invalida. Informe novamente: " << endl;
-        cin.get(opcao);
-        cin.ignore();
-
-        opcao = toupper(opcao);
+        getline(cin, opcao);
+        opcao[0] = toupper(opcao[0]);
     }
 
-    return opcao;
+    return opcao[0];
 }
 
 void leiaData(string mensagem, int &dia, int &mes, int &ano){
