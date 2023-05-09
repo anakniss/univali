@@ -32,6 +32,7 @@ void ordenaBubbleSortRecursivo(int, Livro []);
 int pesquisaRecBinaria(string, Livro [], int, int);
 bool validaISBN(string);
 bool validaNome(string);
+bool validaNumeroIntPositivo(string);
 void leiaData(string, int &, int &, int &);
 void leiaISBN(string &);
 void leiaMenu();
@@ -114,6 +115,7 @@ void ordenaBubbleSortRecursivo(int n, Livro acervo[]){
     if(n == 1){
         return;
     }
+
 
     for(int i=0; i < n-1; i++){
         if(acervo[i].isbn > acervo[i+1].isbn){
@@ -239,16 +241,26 @@ void leiaNome(string mensagem, string &nome){
     }
 }
 
-void leiaInteiro(string mensagem, int &num){
-    cout << mensagem << endl;
-    cin >> num;
-    while(num < 0 or cin.fail()) {
-        cin.clear();
-        cin.ignore(10000, '\n');
-        cout << "Dado invalido. Informe novamente" << endl;
-        cin >> num;
+bool validaNumeroIntPositivo(string num){
+    if (num != ""){
+        for(int i=0; i<num.size(); i++)
+            if(not isdigit(num[i]))
+                return false;
     }
-    cin.ignore();
+    else
+        return false;
+    return true;
+}
+
+void leiaInteiro(string mensagem, int &num){
+    string nums;
+    cout << mensagem << endl;
+    getline(cin, nums);
+    while(not validaNumeroIntPositivo(nums)){
+        cout << "Dado invalido. Informe novamente" << endl;
+        getline(cin, nums);
+    }
+    num = atoi(nums.c_str());
 }
 
 void incluaNovoLivro(int &n, Livro acervo[]){
@@ -386,7 +398,7 @@ void devolvaLivro(int l, int n, Livro acervo[], Emprestimo e[]){
         }
         else {
             result = pesquisaRecBinaria(e[codigo].isbn, acervo, 0, n-1);
-            if(result == 0){
+            if(result >= 0){
                 mostraEmprestimo(codigo, e);
 
                 opcao = leiaSN("Deseja mesmo devolver o livro? S/N");
@@ -402,14 +414,18 @@ void devolvaLivro(int l, int n, Livro acervo[], Emprestimo e[]){
 }
 
 void mostraRelatorioEmprestimosAtivos(int l, Emprestimo e[]){
-    if(l == 0){
-            cout << "Nao existem dados a serem informados" << endl;
-    }
+    bool encontrou = false;
+
     for(int i=0; i<l; i++){
         if(e[i].matricula != -1){
             mostraEmprestimo(i, e);
             cout << "==========================================" << endl;
+            encontrou = true;
         }
+    }
+
+    if(encontrou == false){
+        cout << "Nao existem dados a serem informados" << endl;
     }
 }
 
