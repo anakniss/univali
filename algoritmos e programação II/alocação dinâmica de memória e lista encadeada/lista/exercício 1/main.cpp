@@ -6,15 +6,58 @@
 using namespace std;
 
 typedef struct Nodo {
-    string nome;
+    string dado;
     struct Nodo *proximo;
 } Lista;
 
-Nodo retornaEndereco(){
+Nodo* procuraElemento(Nodo* head, string elemento){
+    Nodo* atual = head;
+    while(atual != nullptr){
+        if(atual->dado == elemento){
+            return atual;
+        }
+        atual = atual->proximo;
+    }
+    return nullptr;
+}
 
+string leiaElemento(){
+    string dado;
+
+    cout << "Informe o elemento a ser comparado: " << endl;
+    getline(cin, dado);
+
+    return dado;
 }
 
 int main()
 {
-    Nodo *raiz = new Nodo;
+    Nodo *head = new Nodo;
+    Nodo *primeiro = new Nodo;
+    Nodo *segundo = new Nodo;
+
+    head->dado = "Ana";
+    head->proximo = primeiro;
+    cout << "Valor do head: " << head << endl;
+
+    primeiro->dado = "Kniss";
+    primeiro->proximo = segundo;
+
+    segundo->dado = "Oie";
+    segundo->proximo = nullptr;
+
+    string elemento = leiaElemento();
+    Nodo* result = procuraElemento(head, elemento);
+    cout << "Valor de result: " << result << endl;
+
+    if(result != nullptr){
+        cout << "Endereco identificado: " << result << endl;
+    }
+    else {
+        cout << "Endereco nao encontrado" << endl;
+    }
+
+    delete head;
+    delete primeiro;
+    delete segundo;
 }
