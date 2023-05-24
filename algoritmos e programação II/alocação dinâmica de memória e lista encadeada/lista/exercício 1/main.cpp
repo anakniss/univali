@@ -10,15 +10,15 @@ typedef struct Nodo {
     struct Nodo *proximo;
 } Lista;
 
-Nodo* procuraElemento(Nodo* head, string elemento){
-    Nodo* atual = head;
-    while(atual != nullptr){
+Lista* procuraElemento(Lista* head, string elemento){
+    Lista* atual = head;
+    while(atual != NULL){
         if(atual->dado == elemento){
             return atual;
         }
         atual = atual->proximo;
     }
-    return nullptr;
+    return NULL;
 }
 
 string leiaElemento(){
@@ -32,9 +32,9 @@ string leiaElemento(){
 
 int main()
 {
-    Nodo *head = new Nodo;
-    Nodo *primeiro = new Nodo;
-    Nodo *segundo = new Nodo;
+    Lista *head = new Lista;
+    Lista *primeiro = new Nodo;
+    Lista *segundo = new Nodo;
 
     head->dado = "Ana";
     head->proximo = primeiro;
@@ -44,13 +44,13 @@ int main()
     primeiro->proximo = segundo;
 
     segundo->dado = "Oie";
-    segundo->proximo = nullptr;
+    segundo->proximo = NULL;
 
     string elemento = leiaElemento();
     Nodo* result = procuraElemento(head, elemento);
     cout << "Valor de result: " << result << endl;
 
-    if(result != nullptr){
+    if(result != NULL){
         cout << "Endereco identificado: " << result << endl;
     }
     else {
