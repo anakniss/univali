@@ -18,26 +18,37 @@ typedef struct Nodo2 {
     struct Nodo2 *proximo;
 } DepLista;
 
+void insereFinal(FuncLista **, string);
+void destroiLista(FuncLista **);
+void exibeLista(FuncLista *);
+
 int main()
 {
-    FuncLista* listaFunc = new FuncLista;
-    DepLista* depLista = new DepLista;
+    FuncLista* listaFunc = NULL;
+    DepLista* depLista = NULL;
+    string matricula;
 
-    inserenofinal(listaFunc, string nome);
-    exibelista(listaFunc);
+    do{
+        cout <<"Informe a matricula ou -1 para sair: " << endl;
+        getline(cin, matricula);
+        if(matricula != "-1")
+            insereFinal(&listaFunc, matricula);
+    }while(matricula != "-1");
+
+    exibeLista(listaFunc);
 }
 
-void inserenofinal(FuncLista **ptr_lista, string matricula){
+void insereFinal(FuncLista **ptr_lista, string elemento){
     FuncLista *p, *pant;
     p = new FuncLista;
-
+    cout << p << endl;
     if(p == NULL){
         cout << "Sem memória";
         cin.get();
         exit(1);
     }
 
-    p->valor = valor;
+    p->matricula = elemento;
     p->proximo = NULL;
 
     if(*ptr_lista == NULL) {
@@ -53,7 +64,7 @@ void inserenofinal(FuncLista **ptr_lista, string matricula){
     pant->proximo = p;
 }
 
-void destroilista(FuncLista **ptr_lista) {
+void destroiLista(FuncLista **ptr_lista) {
     FuncLista *p;
     while(*ptr_lista != NULL){
         p = *ptr_lista;
@@ -62,10 +73,10 @@ void destroilista(FuncLista **ptr_lista) {
     }
 }
 
-void exibelista(FuncLista *lista){
-    FuncLista *p = lista;
+void exibeLista(FuncLista *p){
     while(p != NULL){
-        cout << "\n Nodo "<< p << " Valor " << p->valor << endl;
+        cout << "Endereco(Nodo): " << p << endl;
+        cout << "Valor: " << p->matricula << endl;
         p = p->proximo;
     }
 }
@@ -73,7 +84,7 @@ void exibelista(FuncLista *lista){
 FuncLista* retornaEndereco(FuncLista *p, string elemento){
     if(p == NULL)
         return NULL;
-    while(p != NULL and p->nome != elemento){
+    while(p != NULL and p->matricula != elemento){
         p = p->proximo;
     }
     return p;
