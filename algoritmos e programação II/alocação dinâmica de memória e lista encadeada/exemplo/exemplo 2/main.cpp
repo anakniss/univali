@@ -9,7 +9,7 @@ typedef struct Nodo {
 
 void exibeValores(Nodo *r) {
     do {
-       cout << r->n;
+       cout << "Valor: " << r->n << endl;
        r = r->prox;
     }
     while (r != nullptr);
@@ -47,27 +47,39 @@ void excluiNumero(Nodo* r, int n) {
     while (r != nullptr);
 }
 
-void adicionaNumero(Nodo *r, int v){
+void adicionaNumero(Nodo **r, int v){
     Nodo *novo = new Nodo;
 
-    cout << "Anterior: " << r->prox << endl;
-
-    r->prox = novo;
     novo->n = v;
     novo->prox = nullptr;
+    r->prox = novo;
 
-    cout << novo->n << endl;
-    cout << "Atual: " << r->prox << endl;
+    while (r->prox != nullptr){
+        r = r->prox;
+    }
+}
+
+void consulta(Nodo *r, int chave){
+    do {
+        if(r->n == chave){
+            cout << "Valor encontrado no seguinte endereco: " << r->prox << endl;
+            return;
+        }
+        r = r->prox;
+    } while(r->prox != nullptr);
+
+    cout << "Valor não encontrado" << endl;
 }
 
 int main()
 {
-    Nodo *n1 = new Nodo;
-    n1->n = 1;
-    n1->prox = nullptr;
+    Nodo *n1 = nullptr;
 
-    adicionaNumero(n1, 2);
-    cout << "Depois da funcao: " << n1->prox << endl;
-
-    cout << n1->n;
+    adicionaNumero(n1, 12);
+    adicionaNumero(n1, 16);
+    adicionaNumero(n1, 17);
+    exibeValores(n1);
+    consulta(n1, 16);
+    consulta(n1, 12);
+    consulta(n1, 3);
 }
