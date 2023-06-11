@@ -27,6 +27,8 @@ int main()
     {
         cout << "Os vetores possuem os mesmos elementos na mesma ordem";
     }
+
+    return 0;
 }
 
 void adicionaVetores(string mensagem, vector<int> &meuVetor){
