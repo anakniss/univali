@@ -12,7 +12,7 @@ P.ex., a é 1,4,9,16 e b é 4,7,9,9,11 então merge_sorted retorna o array
 
 using namespace std;
 
-void adicionaVetores(string mensagem, vector<int> &);
+void adicionaVetores(string, vector<int> &);
 vector<int> merge_sorted(vector<int> , vector<int>);
 
 int main()
