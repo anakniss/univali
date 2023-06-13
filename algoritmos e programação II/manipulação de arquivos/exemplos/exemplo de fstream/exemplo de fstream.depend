@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1686626293 source:c:\users\ackni\onedrive\documentos\code\github\univali\algoritmos e programação ii\manipulação de arquivos\exemplos\exemplo de fstream\main.cpp
+	<iostream>
+	<fstream>
+
