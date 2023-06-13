@@ -65,7 +65,5 @@ void remove_duplicates(vector<int> &a)
                 j--;
             }
         }
-        cout << "Valor d do IF: " << a[i] << endl;
-
     }
 }
