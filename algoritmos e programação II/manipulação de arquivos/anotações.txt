@@ -1,0 +1,2 @@
+a função write precisa possuir o const antes de char*
+a função read é apenas char*

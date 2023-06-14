@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1686699596 source:c:\users\7793022\onedrive\github\univali\algoritmos e programação ii\manipulação de arquivos\lista a\exercício 6\main.cpp
+	<iostream>
+	<fstream>
+	<iomanip>
+	<cstring>
+
