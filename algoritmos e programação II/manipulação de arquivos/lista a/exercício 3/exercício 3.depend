@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1686792924 source:c:\users\ackni\onedrive\documentos\code\github\univali\algoritmos e programação ii\manipulação de arquivos\lista a\exercício 3\main.cpp
+	<iostream>
+	<fstream>
+	<iomanip>
+
