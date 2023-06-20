@@ -11,12 +11,20 @@ typedef struct Nodo {
     struct Nodo *proximo;
 } Lista;
 
+typedef struct {
+    char palavra[31];
+    int cont;
+} PalavraBin;
+
 void insereFinal(Lista **, char [], int, int &);
 Nodo* criaNodo(char [], int);
 void destroiLista(Lista **);
 void bubbleSort(Lista **, int);
 void mostraListaEncad(Lista *);
 char leiaSN(string);
+void salvaArqBin(Lista *);
+void mostraArqBin(Lista *);
+void informaNomeArq(ifstream &);
 
 int main()
 {
@@ -30,11 +38,21 @@ int main()
 
     do
     {
-        cout << "Informe o nome do arquivo: " << endl;
+        informaNomeArq(arquivoE);
 
-        getline(cin, nomeArq);
+        while(!arquivoE)
+        {
+            opcao = leiaSN("Nao foi possivel abrir o arquivo. Deseja tentar novamente? S/N");
 
-        arquivoE.open(nomeArq.c_str());
+            if(opcao == 'S')
+            {
+                informaNomeArq(arquivoE);
+            }
+            else {
+                cout << "Fechando o programa...";
+                exit(0);
+            }
+        }
 
         if(!arquivoE)
         {
@@ -63,8 +81,13 @@ int main()
             }
         }
 
+        arquivoE.close();
         bubbleSort(&head, k);
         mostraListaEncad(head);
+        salvaArqBin(head);
+        destroiLista(&head);
+        mostraArqBin(head);
+
         opcao = leiaSN("Deseja repetir o processo?");
 
     } while(opcao == 'S');
@@ -72,10 +95,21 @@ int main()
     return 0;
 }
 
+void informaNomeArq(ifstream &arquivo)
+{
+    string nomeArq;
+
+    cout << "Nome do arquivo a ser aberto: ";
+    getline(cin,nomeArq);
+    arquivo.open(nomeArq.c_str());
+}
+
+
 void mostraListaEncad(Lista *head)
 {
-    cout << "\nESCREVENDO A LISTA ENCADEADA E ORDENADA" << endl;
+    cout << "\nLISTA ENCADEADA\n" << endl;
     while(head != NULL){
+
         cout << "Palavra: " << head->palavra << endl;
         cout << "Contagem: " << head->cont << endl;
         cout << "Endereco: " << head->proximo << endl;
@@ -137,6 +171,8 @@ Nodo* criaNodo(char palavra[], int n){
 
 void destroiLista(Lista **ptr_lista)
 {
+    cout << "\nDestruindo lista encadeada..." << endl;
+
     Lista *atual;
     while(*ptr_lista != NULL){
         atual = *ptr_lista;
@@ -210,6 +246,37 @@ char leiaSN(string mensagem){
     }
 
     return opcao[0];
+}
+
+void salvaArqBin(Lista *head)
+{
+    ofstream arquivoBin("arquivoBin.bin", ios::binary);
+
+    PalavraBin p;
+
+    cout << "\nSalvado lista encadeada em arquivo binario..." << endl;
+
+    while(head != NULL){
+        strcpy(p.palavra, head->palavra);
+        p.cont = head->cont;
+        head = head->proximo;
+        arquivoBin.write((const char*)(&p), sizeof(PalavraBin));
+    }
+}
+
+void mostraArqBin(Lista *head)
+{
+    PalavraBin p;
+
+    ifstream arquivoBin("arquivoBin.bin", ios::binary);
+
+    cout << "\nARQUIVO BINARIO\n" << endl;
+
+    while(arquivoBin.read((char*)(&p), sizeof(PalavraBin)))
+    {
+        cout << "Palavra: " << p.palavra << endl;
+        cout << "Contagem: " << p.cont << endl;
+    }
 }
 
 
