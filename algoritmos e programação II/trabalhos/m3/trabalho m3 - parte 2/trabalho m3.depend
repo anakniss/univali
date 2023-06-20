@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1687215692 source:c:\users\ackni\onedrive\documentos\code\github\univali\algoritmos e programação ii\trabalhos\trabalho m3\main.cpp
+	<iostream>
+	<fstream>
+	<string.h>
+

@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1687225825 source:c:\users\ackni\onedrive\documentos\code\github\univali\algoritmos e programação ii\manipulação de arquivos\lista a\trabalho m3 - mari\main.cpp
+	<iostream>
+	<fstream>
+	<cstring>
+
+1687226558 source:c:\users\ackni\downloads\trabalho m3\main.cpp
+	<iostream>
+	<fstream>
+	<cstring>
+
