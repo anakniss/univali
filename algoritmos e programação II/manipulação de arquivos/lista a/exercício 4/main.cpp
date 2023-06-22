@@ -14,7 +14,7 @@ int main()
 
     string nomeArq, nomeArq2;
 
-    char carac;
+    char ch;
 
     bool flag = false;
 
@@ -22,26 +22,42 @@ int main()
     getline(cin, nomeArq);
 
     arquivo1.open(nomeArq.c_str());
+
+    nomeArq2 = nomeArq;
+
+    for(int i = nomeArq2.size()-1; i > 0; i--)
+    {
+        if(nomeArq2.at(i) != '.') {
+            nomeArq2.at(i) = 'x';
+            }
+        else
+            break;
+    }
+
     arquivo2.open(nomeArq2.c_str());
 
-    if(!arquivo1 and arquivo2)
+    if(!arquivo1 and !arquivo2)
     {
         cout << "Nao foi possivel abrir o arquivo";
         exit(0);
     }
 
+    cout << "Nome do arquivo: " << nomeArq2 << endl;
+
     while(!arquivo1.eof())
     {
-        arquivo1.get(carac);
+        arquivo1.get(ch);
 
         if(flag == true)
-            if(carac == '\')
+            if(ch == '\\' or ch == '*')
+            {
+                flag = false;
                 break;
-        if else(carac == '\')
+            }
+        else if(ch == '\\')
             flag = true;
-        else {
-            arquivo2 << carac;
-        }
+        else
+            arquivo2 << ch;
     }
 
     arquivo1.close();

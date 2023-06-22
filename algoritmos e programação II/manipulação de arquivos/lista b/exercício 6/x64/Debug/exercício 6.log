@@ -1,0 +1,7 @@
+﻿  exercício 6.cpp
+C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação II\manipulação de arquivos\lista b\exercício 6\exercício 6.cpp(173,13): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação II\manipulação de arquivos\lista b\exercício 6\exercício 6.cpp(196,13): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação II\manipulação de arquivos\lista b\exercício 6\exercício 6.cpp(229,13): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação II\manipulação de arquivos\lista b\exercício 6\exercício 6.cpp(249,13): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação II\manipulação de arquivos\lista b\exercício 6\exercício 6.cpp(269,13): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  exercício 6.vcxproj -> C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação II\manipulação de arquivos\lista b\exercício 6\x64\Debug\exercício 6.exe
