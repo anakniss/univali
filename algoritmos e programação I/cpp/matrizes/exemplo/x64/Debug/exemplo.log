@@ -1,0 +1,4 @@
+﻿  exemplo.cpp
+C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação I\cpp\matrizes\exemplo\exemplo.cpp(16,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação I\cpp\matrizes\exemplo\exemplo.cpp(23,38): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  exemplo.vcxproj -> C:\Users\ackni\OneDrive\Documentos\Code\github\univali\algoritmos e programação I\cpp\matrizes\exemplo\x64\Debug\exemplo.exe
