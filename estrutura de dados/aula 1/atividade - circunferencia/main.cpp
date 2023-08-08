@@ -1,7 +1,6 @@
 #include <iostream>
-#include <numbers>
 #define pi 3,14
-
+#define TMAX 5
 using namespace std;
 
 typedef struct Circ{
@@ -9,6 +8,9 @@ typedef struct Circ{
 };
 
 Circ cria(){
+
+    Circ c;
+
     cout << "Informe o valor de X" << endl;
     cin >> c.X;
 
@@ -46,12 +48,12 @@ void alteraRaio(Circ &c){
     cin >> c.R;
 }
 
-void alteraRaio(Circ &c){
+void alteraX(Circ &c){
     cout << "Informe o novo valor do ponto X: " << endl;
     cin >> c.X;
 }
 
-void alteraRaio(Circ &c){
+void alteraY(Circ &c){
     cout << "Informe o novo valor do ponto Y: " << endl;
     cin >> c.Y;
 }
@@ -68,13 +70,54 @@ void comparaCirc(Circ p1, Circ p2){
     }
 }
 
-void comparaPosicao(){
+void comparaPosicao(Circ p1, Circ p2){
+    if(p1.R == p2.R && p1.X == p2.X && p2.Y == p2.Y){
+        cout << "Ambas circunferencias possuem a mesma posição";
+    }
+}
 
+void criaCircs(Circ circs[], int tam){
+    cout << "Criando circunferencias..." << endl;
 
+    for(int i = 0; i < tam; i++){
+        if(i == 3){
+            circs[i].X = circs[0].X;
+            circs[i].Y = circs[0].Y;
+            circs[i].R = circs[0].R * 5;
+
+            cout << "Circunferencia de numero " << i + 1 << " criada" << endl;
+        }
+        else if(i == 4){
+            circs[i].X = circs[2].Y / 10;
+
+            cout << "Informe o valor de Y" << endl;
+            cin >> circs[i].Y;
+
+            cout << "Informe o valor do raio" << endl;
+            cin >> circs[i].R;
+
+            cout << "Circunferencia de numero " << i + 1 << " criada" << endl;
+        }
+        else {
+            circs[i] = cria();
+
+            cout << "Circunferencia de numero " << i + 1 << " criada" << endl;
+        }
+    }
 }
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    Circ circs[TMAX];
+
+    criaCircs(circs, TMAX);
+
+    for(int i=0; i < TMAX; i++){
+        cout << "Repassando... Circunferencia de numero " << i << endl;
+        cout << "X" << circs[i].X << endl;
+        cout << "Y" << circs[i].Y << endl;
+        cout << "R" << circs[i].R << endl;
+    }
+
     return 0;
 }
