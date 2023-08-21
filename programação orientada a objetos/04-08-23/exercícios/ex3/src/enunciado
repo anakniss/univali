@@ -1,0 +1,5 @@
+3 Crie uma classe chamada Date que inclua três atributos — mês (tipo int), dia (tipo int) e ano (tipo int).
+Forneça um construtor que inicializa as três variáveis de instância supondo que os valores fornecidos estejam
+corretos. Ofereça um método set e um get para cada variável de instância. Apresente um método
+displayDate que exiba mês, dia e ano separados por barras normais (/). Escreva um aplicativo para testar
+as capacidades da classe Date.
