@@ -4,88 +4,99 @@
 using namespace std;
 
 template<typename T, int MAX>
-struct ListaEstatica
+struct ListaEstaticaGenerica
 {
     int cardinalidade;
-    int elementos[MAX];
+    T elementos [MAX];
 };
 
 template<typename T, int MAX>
-void criaLista(ListaEstatica<T, MAX> &lista)
+void cria(ListaEstaticaGenerica<T, MAX> &lista)
 {
     lista.cardinalidade = 0;
 }
 
 template<typename T, int MAX>
-bool ehVazia(ListaEstatica<T, MAX> lista)
+bool ehVazia (ListaEstaticaGenerica<T, MAX> lista)
 {
     return lista.cardinalidade == 0;
 }
 
 template<typename T, int MAX>
-bool temEspaco(ListaEstatica<T, MAX> lista)
+bool temEspaco (ListaEstaticaGenerica<T, MAX> lista)
 {
     return lista.cardinalidade < MAX;
 }
 
 template<typename T, int MAX>
-int retornaQuantidade(ListaEstatica<T, MAX> lista)
+int numeroDeElementos (ListaEstaticaGenerica<T, MAX> lista)
 {
     return lista.cardinalidade;
 }
 
 template<typename T, int MAX>
-bool verificaElemento(ListaEstatica<T, MAX> lista, int elemento)
+bool existeElemento (ListaEstaticaGenerica<T, MAX> lista, T elemento)
 {
-    for(int i = 0; i < lista.cardinalidade; i++)
-    {
-        if(lista.elementos[i] == elemento)
+    for (int i = 0; i < lista.cardinalidade; i++)
+        if (lista.elementos[i] == elemento)
             return true;
-    }
-
     return false;
 }
 
 template<typename T, int MAX>
-int retornaElemento(ListaEstatica<T, MAX> lista, int posicao)
+bool existePosicao(ListaEstaticaGenerica<T, MAX> lista, int posicao)
 {
+    return ((posicao >= 1) && (posicao <= lista.cardinalidade));
+}
+
+template<typename T, int MAX>
+T umElemento(ListaEstaticaGenerica<T, MAX> lista, int posicao)
+{
+    if(posicao < 1 || posicao > lista.cardinalidade)
+        throw "POSICAO INVALIDA";
     return lista.elementos[posicao - 1];
 }
 
 template<typename T, int MAX>
-bool verificaPosicao(ListaEstatica<T, MAX> lista, int posicao)
+int umaPosicao(ListaEstaticaGenerica<T, MAX> lista, T elemento)
 {
-    return (posicao > 1 && posicao <= lista.cardinalidade);
+    if(!existeElemento(lista, elemento))
+        throw "ELEMENTO INEXISTENTE";
+    for(int i = 0; i < lista.cardinalidade; i++)
+        if(lista.elementos[i] == elemento)
+            return i + 1;
 }
 
 template<typename T, int MAX>
-void insereLista(ListaEstatica<T, MAX> &lista, int elemento, int posicao)
+void insere(ListaEstaticaGenerica<T, MAX> &lista, T elemento, int posicao)
 {
+    if(posicao >= MAX)
+        throw "OVERFLOW";
+    if(posicao < 1 || posicao > lista.cardinalidade + 1)
+        throw "POSICAO INVALIDA";
     for(int i = lista.cardinalidade; i >= posicao; i--)
         lista.elementos[i] = lista.elementos[i - 1];
-
     lista.elementos[posicao - 1] = elemento;
     lista.cardinalidade++;
 }
 
 template<typename T, int MAX>
-void excluiLista(ListaEstatica<T, MAX> lista, int posicao)
+void retira(ListaEstaticaGenerica<T, MAX> &lista, int posicao)
 {
+    if(lista.cardinalidade == 0)
+        throw "UNDERFLOW";
+    if(posicao < 1 || posicao > lista.cardinalidade)
+        throw "POSICAO INVALIDA";
     for(int i = posicao; i < lista.cardinalidade; i++)
-    {
         lista.elementos[i - 1] = lista.elementos[i];
-    }
-
     lista.cardinalidade--;
 }
 
 template<typename T, int MAX>
-void mostraLista(ListaEstatica<T, MAX> lista)
+void mostra(ListaEstaticaGenerica<T, MAX> lista)
 {
     for(int i = 0; i < lista.cardinalidade; i++)
-    {
-        cout << lista.elementos[i] << endl;
-    }
+        cout << "Item " << i+1 << ": " << lista.elementos[i] << endl;
 }
 
 #endif // EX1_-_LISTA_ESTATICA_GENERICA_H_INCLUDED

@@ -7,9 +7,9 @@ using namespace std;
 
 int main()
 {
-    ListaEstatica<int , MAX> lista;
+    ListaEstaticaGenerica<int , MAX> lista;
 
-    criaLista(lista);
+    cria(lista);
 
     insereLista(lista, rand()%3 + 5, 0);
 
