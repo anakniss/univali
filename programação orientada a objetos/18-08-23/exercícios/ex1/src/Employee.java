@@ -22,7 +22,7 @@ public class Employee {
     }
 
     public String toString(){
-        return "Name: " + getFirstName() + " " + getLastName() + "\n" +
-                "Social Security Number: " + getSocialSecurityNumber();
+        return String.format("Name: %s %s\nSocial Security Number: %s", getFirstName(),
+                getLastName(), getSocialSecurityNumber());
     }
 }
