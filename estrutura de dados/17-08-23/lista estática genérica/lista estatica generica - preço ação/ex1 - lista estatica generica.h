@@ -1,5 +1,5 @@
-#ifndef EX1_-_LISTA_ESTATICA_GENERICA_H_INCLUDED
-#define EX1_-_LISTA_ESTATICA_GENERICA_H_INCLUDED
+#ifndef EX1_LISTA_ESTATICA_GENERICA_H_INCLUDED
+#define EX1_LISTA_ESTATICA_GENERICA_H_INCLUDED
 
 using namespace std;
 
@@ -17,25 +17,25 @@ void cria(ListaEstaticaGenerica<T, MAX> &lista)
 }
 
 template<typename T, int MAX>
-bool ehVazia (ListaEstaticaGenerica<T, MAX> lista)
+bool ehVazia(ListaEstaticaGenerica<T, MAX> lista)
 {
     return lista.cardinalidade == 0;
 }
 
 template<typename T, int MAX>
-bool temEspaco (ListaEstaticaGenerica<T, MAX> lista)
+bool temEspaco(ListaEstaticaGenerica<T, MAX> lista)
 {
     return lista.cardinalidade < MAX;
 }
 
 template<typename T, int MAX>
-int numeroDeElementos (ListaEstaticaGenerica<T, MAX> lista)
+int numeroDeElementos(ListaEstaticaGenerica<T, MAX> lista)
 {
     return lista.cardinalidade;
 }
 
 template<typename T, int MAX>
-bool existeElemento (ListaEstaticaGenerica<T, MAX> lista, T elemento)
+bool existeElemento(ListaEstaticaGenerica<T, MAX> lista, T elemento)
 {
     for (int i = 0; i < lista.cardinalidade; i++)
         if (lista.elementos[i] == elemento)
@@ -70,10 +70,11 @@ int umaPosicao(ListaEstaticaGenerica<T, MAX> lista, T elemento)
 template<typename T, int MAX>
 void insere(ListaEstaticaGenerica<T, MAX> &lista, T elemento, int posicao)
 {
-    if(posicao >= MAX)
+    if(lista.cardinalidade + 1 > MAX)
         throw "OVERFLOW";
     if(posicao < 1 || posicao > lista.cardinalidade + 1)
         throw "POSICAO INVALIDA";
+
     for(int i = lista.cardinalidade; i >= posicao; i--)
         lista.elementos[i] = lista.elementos[i - 1];
     lista.elementos[posicao - 1] = elemento;
@@ -95,8 +96,11 @@ void retira(ListaEstaticaGenerica<T, MAX> &lista, int posicao)
 template<typename T, int MAX>
 void mostra(ListaEstaticaGenerica<T, MAX> lista)
 {
-    for(int i = 0; i < lista.cardinalidade; i++)
+    for(int i = 0; i < lista.cardinalidade; i++){
         cout << "Item " << i+1 << ": " << lista.elementos[i] << endl;
+    }
 }
 
-#endif // EX1_-_LISTA_ESTATICA_GENERICA_H_INCLUDED
+
+
+#endif // EX1_LISTA_ESTATICA_GENERICA_H_INCLUDED

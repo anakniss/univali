@@ -7,18 +7,27 @@ using namespace std;
 
 int main()
 {
-    ListaEstaticaGenerica<int , MAX> lista;
+    ListaEstaticaGenerica<int, MAX> lista;
 
     cria(lista);
+    int minutos = 0;
 
-    insereLista(lista, rand()%3 + 5, 0);
+    insere(lista, rand()%2 + 5, 1);
 
-    for(int i = 1; i < 20; i++)
-    {
-        insereLista(lista, lista.elementos[i]  i);
+    while (minutos < 380) {
+        cout << "Lista a " << minutos << " minutos" << endl;
+        minutos += 20;
+        insere(lista, rand()%6 - 3, numeroDeElementos(lista) + 1);
+        //cout << "Minutos antes: " << minutos << endl;
+        //insere(lista, 0, 1);
+        //cout << "Minutos depois: " << minutos << endl;
+        mostra(lista);
     }
 
-    mostraLista(lista);
+    cout << "\n===============================" << endl;
+    cout << "LISTA FINAL" << endl;
+    cout << "===============================" << endl;
+    mostra(lista);
 
     return 0;
 }
