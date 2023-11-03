@@ -9,6 +9,5 @@ public class Main {
                 "modelo pneu 1");
 
         System.out.println(veiculo.toString());
-
     }
 }
