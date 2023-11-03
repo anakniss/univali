@@ -66,9 +66,10 @@ GROUP BY Produto.descricao
 HAVING quantidade_total < 20 OR quantidade_total IS NULL;
 
 -- j) Retorne todos os vendedores que no último ano tiveram valor de vendas acumulado acima da média das vendas de todos os vendedores.
-SELECT Vendedor.nome, soma FROM (
+SELECT Vendedor.nome, soma
+FROM (
     SELECT Venda.vendedor as vendedor, SUM(Venda.quantidade * Produto.preco) as soma 
-    FROM loja.venda 
+    FROM Venda
     JOIN Produto ON Venda.produto = Produto.descricao
     WHERE Venda.data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
     GROUP BY Venda.vendedor
@@ -77,7 +78,7 @@ JOIN Vendedor ON medias.vendedor = Vendedor.matricula
 HAVING soma > (
     SELECT AVG(soma2) FROM (
         SELECT SUM(Venda.quantidade * Produto.preco) as soma2 
-        FROM loja.venda 
+        FROM Venda
         JOIN Produto ON Venda.produto = Produto.descricao
         WHERE Venda.data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
         GROUP BY Venda.vendedor
