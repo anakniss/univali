@@ -88,7 +88,7 @@ public class Main {
                     case "3":
                         System.out.println("Nome do filme: ");
                         nomeFilme = input.nextLine();
-                        System.out.println("Gênero do filme: ");
+                        System.out.println("Gênero do filme (ACAO, AVENTURA, SUSPENSE, COMEDIA, ROMANCE, TERROR, DRAMA): ");
                         genero = input.nextLine().toUpperCase();
                         System.out.println("Duração do filme: ");
                         duracao = verificaNum.solicitarNumero();
