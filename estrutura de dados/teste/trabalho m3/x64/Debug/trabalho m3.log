@@ -1,0 +1,10 @@
+﻿  trabalho m3.cpp
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\ordenacoes.h(146,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\trabalho m3.cpp(70,5): message : see reference to function template instantiation 'void geraDadosIniciais<int>(int,std::vector<int,std::allocator<int>> &,int,int)' being compiled
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\ordenacoes.h(166,9): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\ordenacoes.h(100,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\ordenacoes.h(148,3): message : see reference to function template instantiation 'void shellSortCrescente<int>(std::vector<int,std::allocator<int>> &,int &,int &)' being compiled
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\trabalho m3.cpp(70,5): message : see reference to function template instantiation 'void geraDadosIniciais<int>(int,std::vector<int,std::allocator<int>> &,int,int)' being compiled
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\ordenacoes.h(33,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\ordenacoes.h(157,3): message : see reference to function template instantiation 'void shellSortDecrescente<int>(std::vector<int,std::allocator<int>> &,int &,int &)' being compiled
+  trabalho m3.vcxproj -> C:\Users\ackni\OneDrive\Documentos\Code\univali\estrutura de dados\teste\trabalho m3\x64\Debug\trabalho m3.exe
