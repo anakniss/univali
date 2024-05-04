@@ -21,8 +21,6 @@ const Person = sequelize.define(
     },
     userId: {
       type: DataTypes.STRING,
-      //primaryKey: true,
-      //autoIncrement: true,
     },
     firstName: {
       type: DataTypes.STRING,

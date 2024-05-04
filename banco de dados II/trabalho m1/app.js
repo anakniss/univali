@@ -50,11 +50,12 @@ const City = sequelize.define(
   {
     city_id: {
       type: DataTypes.INTEGER,
+
       autoIncrement: true,
       primaryKey: true,
     },
     city: { type: DataTypes.STRING },
-    country_id: { type: DataTypes.INTEGER }
+    country_id: { type: DataTypes.INTEGER },
   },
   { tableName: "city", timestamps: false }
 );
@@ -69,7 +70,7 @@ async function listCustomers() {
 
   customers.forEach((customer) => {
     console.log(
-      `Customer: ${customer.first_name} ${customer.last_name} | Address: ${customer.dataValues.Address.dataValues.address}`
+      `Cliente: ${customer.first_name} ${customer.last_name} | Endereço: ${customer.dataValues.Address.dataValues.address}`
     );
   });
 }
@@ -79,7 +80,7 @@ async function listAddresses() {
 
   addresses.forEach(async (address) => {
     let city = await City.findByPk(address.city_id);
-    console.log(`Address: ${address.address} - ${city.dataValues.city}`);
+    console.log(`Endereço: ${address.address} - ${city.dataValues.city}`);
   });
 }
 
@@ -93,11 +94,11 @@ async function listIdCities() {
 
 async function addAddress() {
   try {
-    const address2 = prompt("Inform the customer's address: ");
-    const postalCode = prompt("Inform the customer's postal code: ");
-    const district2 = prompt("Inform the customer's district: ");
-    const cityId = prompt("Inform the customer's city: ");
-    const phoneNumber = prompt("Inform the customer's phone number: ");
+    const address2 = prompt("Informe o endereço do cliente: ");
+    const postalCode = prompt("Informe o código postal do cliente: ");
+    const district2 = prompt("Informe o distrito do cliente: ");
+    const cityId = prompt("Informe o ID da cidade do cliente: ");
+    const phoneNumber = prompt("Informe o telefone do cliente: ");
     const point = { type: "Point", coordinates: [-76.984722, 39.807222] };
 
     let address = {
@@ -118,8 +119,8 @@ async function addAddress() {
 
 async function addCity() {
   try {
-    const city2 = prompt("Inform the name of the city: ");
-    const countryId = prompt("Inform the country ID of the city: ");
+    const city2 = prompt("Informe o nome da cidade: ");
+    const countryId = prompt("Informe o ID do país da cidade informada: ");
 
     let city = {
       city: city2,
@@ -135,15 +136,15 @@ async function addCity() {
 
 async function mainMenu() {
   while (true) {
-    console.log("1. List clients");
-    console.log("2. List addresses");
-    console.log("3. List city IDs");
-    console.log("4. Add client");
-    console.log("5. Add address");
-    console.log("6. Add city");
-    console.log("7. Exit");
+    console.log("1. Listar clientes");
+    console.log("2. Listar endereços");
+    console.log("3. Listar os IDs das cidades cadastradas");
+    console.log("4. Adicionar cliente");
+    console.log("5. Adicionar endereço");
+    console.log("6. Adicionar cidade");
+    console.log("7. Sair");
 
-    const choice = parseInt(prompt("Choose an option: "));
+    const choice = parseInt(prompt("Escolha uma opção: "));
 
     switch (choice) {
       case 1:
@@ -165,10 +166,10 @@ async function mainMenu() {
         await addCity();
         break;
       case 7:
-        console.log("Exiting the program.");
+        console.log("Saindo...");
         process.exit(0);
       default:
-        console.log("Invalid option. Please choose again.");
+        console.log("Opção inválida. Por favor, escolha .");
         break;
     }
   }
