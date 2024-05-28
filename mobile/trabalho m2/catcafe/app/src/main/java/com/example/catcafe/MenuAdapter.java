@@ -14,6 +14,7 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
 
     private List<MenuItem> menuItems;
+    private boolean isOffline;
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
@@ -28,8 +29,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
     }
 
-    public MenuAdapter(List<MenuItem> menuItems) {
+    public MenuAdapter(List<MenuItem> menuItems, boolean isOffline) {
         this.menuItems = menuItems;
+        this.isOffline = isOffline;
     }
 
     @NonNull
@@ -43,9 +45,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
         MenuItem currentItem = menuItems.get(position);
         holder.imageView.setImageResource(currentItem.getImageDrawable());
-        //holder.imageView.setImageURI(new Uri("@drawable/" + currentItem.getImageResourceName()));
         holder.nameTextView.setText(currentItem.getName());
-        holder.priceTextView.setText(String.format("$%.2f", currentItem.getPrice()));
+        if (isOffline) {
+            holder.priceTextView.setText("a consultar");
+        } else {
+            holder.priceTextView.setText(String.format("$%.2f", currentItem.getPrice()));
+        }
     }
 
     @Override
