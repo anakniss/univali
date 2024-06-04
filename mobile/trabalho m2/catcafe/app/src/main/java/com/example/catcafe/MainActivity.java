@@ -54,10 +54,8 @@ public class MainActivity extends AppCompatActivity {
                     double price = inside.getDouble("price");
                     String image = inside.getString("image");
 
-                    // Save image to internal storage
                     saveImageToInternalStorage(image);
 
-                    // Save data to SQLite
                     saveDataToSQLite(name, price, image);
 
                     Resources resources = getApplicationContext().getResources();
@@ -104,14 +102,13 @@ public class MainActivity extends AppCompatActivity {
     private void saveDataToSQLite(String name, double price, String image) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        // Verificar se os dados já existem no banco de dados
+        // Verifica se os dados já existem no banco de dados
         Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_MENU_ITEMS +
                 " WHERE " + DatabaseHelper.COLUMN_NAME + " = ? AND " +
                 DatabaseHelper.COLUMN_PRICE + " = ? AND " +
                 DatabaseHelper.COLUMN_IMAGE + " = ?", new String[]{name, String.valueOf(price), image});
 
         if (cursor.getCount() == 0) {
-            // Os dados não existem, então podemos inseri-los
             ContentValues values = new ContentValues();
             values.put(DatabaseHelper.COLUMN_NAME, name);
             values.put(DatabaseHelper.COLUMN_PRICE, price);
@@ -132,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             double price = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PRICE));
             String image = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_IMAGE));
 
-            // Load image from internal storage
+            // Carrega a imagem do banco de dados (SQLite)
             File file = new File(getFilesDir(), image + ".png");
             if (file.exists()) {
                 Resources resources = getApplicationContext().getResources();
