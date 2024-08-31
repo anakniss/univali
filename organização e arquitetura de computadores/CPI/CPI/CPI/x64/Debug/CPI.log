@@ -1,0 +1,5 @@
+﻿  CPI.cpp
+C:\Code\univali\organização e arquitetura de computadores\CPI\CPI\CPI\CPI.cpp(167,19): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Code\univali\organização e arquitetura de computadores\CPI\CPI\CPI\CPI.cpp(170,19): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Code\univali\organização e arquitetura de computadores\CPI\CPI\CPI\CPI.cpp(160,1): warning C4715: 'define_mnemonic': not all control paths return a value
+  CPI.vcxproj -> C:\Code\univali\organização e arquitetura de computadores\CPI\CPI\x64\Debug\CPI.exe
