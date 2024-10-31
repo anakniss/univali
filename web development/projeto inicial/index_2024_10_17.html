@@ -1,0 +1,350 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body > *{
+                margin-left: 5%;
+            }
+            input, select, th, td, label{
+                font-size: 1.5em;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            tfoot th, tfoot td{
+                text-align: right;
+            }
+            thead tr{
+                background-color: rgb(4, 144, 244);
+            }
+            tfoot tr{
+                background-color: rgb(207, 209, 211);
+            }
+            input[type="submit"], input[type="button"] {
+                background-color: rgb(4, 144, 244);
+                color:#FFF;
+                border: 0px solid black;
+                padding: 8px;
+            }
+            form{
+                width: 90%;
+                border: 0px solid black;
+                /*margin:  0 auto;*/
+                margin-left: 5%;
+            }
+            input[type="text"], select, input[type="password"]{
+                width: 60%;
+            }
+            table tbody tr td:nth-child(2){
+                text-align: center;
+            }
+            input, select {
+                margin-bottom: 10px;
+            }
+
+            #center {
+    width: 900px;
+    margin: auto;
+}
+ #header, #sidebar-left, #sidebar-right, #content, #footer {
+    border: 2px solid black;
+    padding: 5px;
+}
+ #sidebar-left, #sidebar-right {
+    margin-top: 10px;
+    width: 20%;
+}
+ #sidebar-right {
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+ #sidebar-left {
+    float: left;
+    margin-right: 10px;
+}
+ #content {
+    margin: 10px 5px;
+    width: 52%;
+    float: left;
+}
+ #header, #footer {
+    clear: both;
+}
+
+table{
+    display:none;
+}
+
+@media only screen and (min-width : 420px) {
+    table{
+        display:table;
+    }
+}
+
+        </style>
+        <script>
+            function verificaValorTurno(){
+                let listaTurnosDisponiveis = document.inscricao.turno;
+                let listaTurnosSelecionados = [];
+                let n = listaTurnosDisponiveis.length;
+                
+                for(let i=0; i < n ; i++){
+                    let element = listaTurnosDisponiveis[i];
+                    if(element.checked){
+                        listaTurnosSelecionados.push(element.value);
+                    }
+                }
+                if(listaTurnosSelecionados.length === 0){
+                    window.alert("Nenhum turno selecionado");
+                }else{
+                    window.alert("Turno(s) selecionados: "+ listaTurnosSelecionados.join(", "));
+                }
+            }
+
+            function manipulaPublicacoes(){
+                let element = document.getElementById("publicacoes_cotb_2014");
+                element.innerHTML = "";
+                
+                const ul = document.createElement("ul");
+                let  li = document.createElement("li");
+                li.innerText = "Pub A";
+                ul.appendChild(li);
+``
+                li = document.createElement("li");
+                li.innerText = "Pub B";
+                ul.appendChild(li);
+
+
+                li = document.createElement("li");
+                li.innerText = "Pub C";
+                ul.appendChild(li);
+
+                element.appendChild(ul);
+                /*
+                const publicacoes = ["Pub A", "Pub B", "Pub C", "Pub D" ];
+                let lista = "<ul>";
+                for(pub in publicacoes){
+                    lista += "<li>"+ publicacoes[pub] +"</li>";
+                }
+               
+                lista += "</ul>";
+                element.innerHTML = lista;
+                console.log(element.innerHTML, element.innerText);
+                console.log(element.children, element.childNodes);
+                */
+            }
+
+
+            function somaValores(ref){
+                let f;
+                z = true;
+                console.log(f,z);
+                let a = window.prompt("Digite valor 1:");
+                console.log("a:", a, typeof (a));
+                let b = prompt("Digite valor 2:");
+                a = Number.parseFloat(a);
+                b = Number.parseFloat(b);
+                 //  if(!Number.isNaN(a) && !isNaN(b) ){
+                if(Number.isNaN(a) || isNaN(b) ){
+                    window.alert("Não foi possível converter");
+                    console.error("problemas na conversão de a ou b");
+                }else{
+                    let c = a + b;
+                    console.log("c:", c, typeof (c));
+                    let resp = window.confirm("Você quer ver o resultado?");
+                    if(resp){
+                        alert("Soma::"+ c);
+                    }
+                }
+            }
+            //somaValores();
+
+            function atualizaDisciplinas(){
+                const f = document.inscricao.campus;
+                let campus = f.value;
+                let campusTxt = f.options[f.selectedIndex].text;
+                console.log(campus, campusTxt);
+                const disciplinasSaoJose = ["Programação Web", "Banco de dados", "Mobile"];
+                const disciplinasCamburiu = ["Arquitetura de Computadores", "Algebra"];
+                const disciplinasItajai = ["Linguagem de máquina", "Ergonomia"];
+                const selectDisciplina = document.inscricao.disciplina;
+                switch(campus){
+                    case "001" : atualizaOpcoes(selectDisciplina, disciplinasSaoJose); break;
+                    case "002" : atualizaOpcoes(selectDisciplina, disciplinasCamburiu); break;
+                    case "003" : atualizaOpcoes(selectDisciplina, disciplinasItajai); break;
+                }
+            }
+
+            function atualizaOpcoes (select, options){
+                while (select.options.length > 0 )
+                    select.removeChild(select.options[select.options.length-1]);
+
+                for (let i=0; i< options.length; i++)
+                {
+                    const disciplina = options[i];
+                    const option = document.createElement("option");
+                    option.text = disciplina;
+                    option.value = disciplina;
+                    select.appendChild(option);
+                }
+            }
+
+            function excluirLinha(){
+             
+                    let resp = window.confirm("Você quer excluir esta linha?");
+                    if(resp){
+
+                    }
+                
+            }
+            function adicionarEvento(){
+                const tbody = document.getElementById("tBodyEventos");
+                const tr = document.createElement("tr");
+                let td = document.createElement("td");
+                const campoNome = document.createElement("input");
+                td.appendChild(campoNome);
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                tr.appendChild(td);
+                const campoData = document.createElement("input");
+                campoData.type = "date";
+                td.appendChild(campoData);
+
+                td = document.createElement("td");
+                tr.appendChild(td);
+                const bt = document.createElement("input");
+                bt.type = "button";
+                bt.value = "Excluir";
+                bt.addEventListener("click",function(){
+                    let resp = window.confirm("Você quer excluir esta linha?");
+                    if(resp){
+                        tbody.removeChild(tr);
+                    }
+                });
+                td.appendChild(bt);
+
+                tbody.appendChild(tr);
+            }
+
+            function validaLogin(){
+                let divMsgLogin = document.getElementById("mensagens_erro_login");
+                let divMsgSenha = document.getElementById("mensagens_erro_senha");
+                let divMsg = document.getElementById("mensagens_erro");
+                let temErro = false;
+                divMsgLogin.style.display = "none";
+                divMsgSenha.style.display = "none";
+                if(document.autenticacao.login.value.indexOf("@") === -1){
+                    divMsg.style.display = "block";
+                    temErro = true;
+                }
+                if(document.autenticacao.password.value === ""){
+                    divMsgSenha.style.display = "block";
+                    temErro = true;
+                }
+                if(!temErro){
+                    return true;
+                }
+                else {
+                    false;
+                }
+            }
+
+            function foco(el){
+                el.focus();
+            }
+
+
+        </script>
+    </head>
+    <body onload="atualizaDisciplinas()">
+        <ul>
+            <li id="mensagens_erro_login" style="display:none">
+                O campo <a href="javascript:foco('login')">login</a> deve ser um e-mail válido.
+            </li>
+            <li id="mensagens_erro_senha"  style="display:none">
+                A <a href="javascript:foco('password')">senha</a>...
+            </li>
+        </ul> 
+        <form  onsubmit="return validaLogin()" method="POST" action="http://localhost:5333/autenticar" name="autenticacao">
+            <input type="text" name="login" placeholder="Login..." value="@univali.br" />
+            <br />
+                <input type="password" name="password" placeholder="Sua senha..." value="123" />
+            <br />
+            <input type="submit" /> 
+        </form>
+        <form method="GET" action="http://localhost:5333/formulario" name="inscricao">
+
+            <select name="campus" onChange="atualizaDisciplinas()">
+                <option value="001">São José</option>
+                <option value="002" selected>Camburiu</option>
+                <option value="003">Itajaí</option>
+            </select>
+            <select name="disciplina" multiple>
+                <option value="">Selecine o campus</option>
+            </select>
+            <br />
+            
+            <input type="checkbox" name="turno" value="1" id="turno_1"   />
+            <label for="turno_1">Matutino</label>
+
+            <input type="checkbox" name="turno" value="2" id="turno_2"   />
+            <label for="turno_2">Noturno</label>
+            <br /><br />
+            <input type="radio" name="cor" value="F00" id="cor_vermelha"  checked />
+            <label for="cor_vermelha">Vermelha</label>
+            <br />
+            <input type="radio" name="cor" value="00F" id="cor_azul" />
+            <label for="cor_azul">Azul</label>
+            <br />
+            <input type="submit">
+        </form>
+        <br /> <br />
+            <table  width="90%" align="center" border="1" cellpadding="10" cellspacing="0">
+               
+                <thead>
+                    <tr>
+                        <th>Evento</th>
+                        <th>Data</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tBodyEventos">
+                    <tr> 
+                        <td>COTB 14</td>
+                        <td>01.03.23</td> 
+                        <td rowspan="2" id="publicacoes_cotb_2014">
+                            <b>Publicações disponíveis</b>
+                            <p>
+                                Publicação 1
+                            </p>
+                            <p>
+                                Publicação 2
+                            </p>
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td>COTB 15</td>
+                        <td >01.04.24</td>  
+                       
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total eventos: </th>
+                        <td colspan="2">2</td>
+                    </tr>
+                <tfoot>
+            </table>        
+            <br />
+            <input type="button" value="Adicionar evento" onclick="adicionarEvento()" />
+            <input type="button" value="Processar Publicações" onclick="manipulaPublicacoes()" />
+            <script>
+   
+
+                const elementos = document.getElementsByName("turno");
+                elementos.forEach((elemento) => {
+                    console.log("Estou processando o ", elemento, " com uma funcao anonima com arrow sintax");
+                });
+            </script>
+        </body>
+</html>
