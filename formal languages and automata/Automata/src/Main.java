@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
 
-    private JTextArea campoA;
-    private JTextArea campoB;
-    private JButton analisarButton;
-    private JButton limparButton;
+    private JTextArea textAreaA;
+    private JTextArea textAreaB;
+    private JButton analyzeButton;
+    private JButton clearButton;
 
     public Main() {
         setTitle("Reconhecedor de Linguagem Regular");
@@ -17,63 +17,63 @@ public class Main extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        JPanel panelCampos = new JPanel(new GridLayout(2, 1, 10, 10));
+        JPanel fieldsPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 
-        campoA = new JTextArea(10, 50);
-        campoA.setLineWrap(true);
-        campoA.setWrapStyleWord(true);
-        JScrollPane scrollA = new JScrollPane(campoA);
+        textAreaA = new JTextArea(10, 50);
+        textAreaA.setLineWrap(true);
+        textAreaA.setWrapStyleWord(true);
+        JScrollPane scrollA = new JScrollPane(textAreaA);
         scrollA.setBorder(BorderFactory.createTitledBorder("Campo A"));
-        panelCampos.add(scrollA);
+        fieldsPanel.add(scrollA);
 
-        campoB = new JTextArea(15, 50);
-        campoB.setLineWrap(true);
-        campoB.setWrapStyleWord(true);
-        campoB.setEditable(false);
-        JScrollPane scrollB = new JScrollPane(campoB);
+        textAreaB = new JTextArea(15, 50);
+        textAreaB.setLineWrap(true);
+        textAreaB.setWrapStyleWord(true);
+        textAreaB.setEditable(false);
+        JScrollPane scrollB = new JScrollPane(textAreaB);
         scrollB.setBorder(BorderFactory.createTitledBorder("Campo B"));
-        panelCampos.add(scrollB);
+        fieldsPanel.add(scrollB);
 
-        JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        analisarButton = new JButton("✔ Analisar");
-        limparButton = new JButton("🧹 Limpar");
-        panelBotoes.add(analisarButton);
-        panelBotoes.add(limparButton);
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        analyzeButton = new JButton("✔ Analisar");
+        clearButton = new JButton("🧹 Limpar");
+        buttonsPanel.add(analyzeButton);
+        buttonsPanel.add(clearButton);
 
-        add(panelCampos, BorderLayout.CENTER);
-        add(panelBotoes, BorderLayout.SOUTH);
+        add(fieldsPanel, BorderLayout.CENTER);
+        add(buttonsPanel, BorderLayout.SOUTH);
 
-        analisarButton.addActionListener(new ActionListener() {
+        analyzeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                analisar();
+                analyze();
             }
         });
 
-        limparButton.addActionListener(new ActionListener() {
+        clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                campoA.setText("");
-                campoB.setText("");
+                textAreaA.setText("");
+                textAreaB.setText("");
             }
         });
     }
 
-    private void analisar() {
-        String input = campoA.getText().trim();
-        campoB.setText("");
+    private void analyze() {
+        String input = textAreaA.getText().trim();
+        textAreaB.setText("");
 
         if (input.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, digite uma sequência no Campo A.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        String resultado = processarAutomato(input);
-        campoB.setText(resultado);
+        String result = processAutomaton(input);
+        textAreaB.setText(result);
     }
 
-    private String processarAutomato(String input) {
-        int[][] tabela = {
+    private String processAutomaton(String input) {
+        int[][] table = {
                 {6, 9, 5, 2, 7, 9},
                 {9, 9, 5, 2, 7, 9},
                 {9, 9, 9, 2, 7, 9},
@@ -85,56 +85,53 @@ public class Main extends JFrame {
                 {9, 0, 9, 9, 9, 9},
                 {9, 9, 9, 9, 9, 9}
         };
-        boolean[] estadosFinais = {true, true, true, true, false, false, false, false, false, false};
+        boolean[] finalStates = {true, true, true, true, false, false, false, false, false, false};
 
-        // Divide por espaços, quebras de linha ou operadores
-        String[] partes = input.split("\\s+");
+        String[] parts = input.split("\\s+");
+        StringBuilder result = new StringBuilder();
 
-        StringBuilder resultado = new StringBuilder();
-
-        for (String parte : partes) {
-            // Se a parte contém operadores, quebra mais ainda:
-            String[] tokens = parte.split("(?=[+\\-*/])|(?<=[+\\-*/])");
+        for (String part : parts) {
+            String[] tokens = part.split("(?=[+\\-*/])|(?<=[+\\-*/])");
             for (String token : tokens) {
                 token = token.trim();
                 if (token.isEmpty()) continue;
 
                 if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
-                    resultado.append("operador aritmético: ").append(token).append("\n");
-                } else if (temSimboloInvalido(token)) {
-                    resultado.append("ERRO: símbolo(s) inválido(s): ").append(token).append("\n");
-                } else if (reconheceSentenca(tabela, estadosFinais, token)) {
-                    resultado.append("sentença válida: ").append(token).append("\n");
+                    result.append("operador aritmético: ").append(token).append("\n");
+                } else if (hasInvalidSymbol(token)) {
+                    result.append("ERRO: símbolo(s) inválido(s): ").append(token).append("\n");
+                } else if (recognizeSentence(table, finalStates, token)) {
+                    result.append("sentença válida: ").append(token).append("\n");
                 } else {
-                    resultado.append("ERRO: sentença inválida: ").append(token).append("\n");
+                    result.append("ERRO: sentença inválida: ").append(token).append("\n");
                 }
             }
         }
 
-        return resultado.toString();
+        return result.toString();
     }
 
-    private boolean reconheceSentenca(int[][] tabela, boolean[] ef, String sentenca) {
-        int estado = 4; // estado inicial
-        for (char simbolo : sentenca.toCharArray()) {
-            int coluna = getColuna(simbolo);
-            estado = tabela[estado][coluna];
+    private boolean recognizeSentence(int[][] table, boolean[] finalStates, String sentence) {
+        int state = 4;
+        for (char symbol : sentence.toCharArray()) {
+            int column = getColumn(symbol);
+            state = table[state][column];
         }
-        return ef[estado];
+        return finalStates[state];
     }
 
-    private int getColuna(char simbolo) {
-        switch (simbolo) {
+    private int getColumn(char symbol) {
+        switch (symbol) {
             case 'a': return 0;
             case 'b': return 1;
             case 'c': return 2;
             case 'd': return 3;
             case 'e': return 4;
-            default: return 5; // COLUNA_ERRO
+            default: return 5;
         }
     }
 
-    private boolean temSimboloInvalido(String s) {
+    private boolean hasInvalidSymbol(String s) {
         for (char c : s.toCharArray()) {
             if ("abcde".indexOf(c) == -1 && "+-*/".indexOf(c) == -1) {
                 return true;
