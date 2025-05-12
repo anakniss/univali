@@ -35,8 +35,8 @@ public class Main extends JFrame {
         fieldsPanel.add(scrollB);
 
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        analyzeButton = new JButton("✔ Analisar");
-        clearButton = new JButton("🧹 Limpar");
+        analyzeButton = new JButton("Analisar");
+        clearButton = new JButton("Limpar");
         buttonsPanel.add(analyzeButton);
         buttonsPanel.add(clearButton);
 
